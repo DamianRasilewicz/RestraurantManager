@@ -12,15 +12,28 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column()
+    @Column
+    private String name;
+
     private double price;
 
+
     private double finalPrice;
+
+    private int quantity;
 
     @OneToOne()
     @JoinColumn(name = "type_of_products_id")
     private TypeOfProduct type;
 
-    @OneToMany(mappedBy = "product")
+    @ManyToMany
     private List<Addition> additions = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "products")
+    private List<Order> orders = new ArrayList<>();
+
+    @ManyToMany
+    private List<Ingradient> ingradients = new ArrayList<>();
+
+
 }

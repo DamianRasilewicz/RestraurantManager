@@ -16,8 +16,7 @@ public class User {
 
     private String email;
 
-    @OneToOne()
-    @JoinColumn(name = "orders_id")
+    @OneToOne(mappedBy = "user")
     private Order order;
 
     @OneToOne(mappedBy = "user")

@@ -16,7 +16,10 @@ public class Order {
     @JoinColumn(name = "users_id")
     private User user;
 
-    @OneToMany()
-    @JoinColumn(name = "user_id")
-    private List<Object> list = new ArrayList<>();
+    @OneToOne(mappedBy = "order")
+    private Comment comment;
+
+    @ManyToMany
+    private List<Product> products = new ArrayList<>();
+
 }

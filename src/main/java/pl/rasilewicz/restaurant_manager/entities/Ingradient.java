@@ -5,23 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "additions")
-public class Addition {
+@Table(name = "ingradients")
+public class Ingradient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column()
-    private double price;
-
     private String name;
 
-    private String description;
-
-    @ManyToMany(mappedBy = "additions")
+    @ManyToMany(mappedBy = "ingradients")
     private List<Product> products = new ArrayList<>();
-
-
-
 }
