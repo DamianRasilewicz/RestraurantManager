@@ -3,16 +3,13 @@ package pl.rasilewicz.restaurant_manager.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "main_course_additions")
-public class MainCourseAddition {
+@Table(name = "type_of_products")
+public class TypeOfProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column()
-    private double price;
-
-    @ManyToOne
-    private MainCourse mainCourse;
+    private String name;
 }

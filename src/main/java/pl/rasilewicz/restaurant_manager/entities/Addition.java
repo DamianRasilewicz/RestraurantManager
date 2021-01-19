@@ -3,8 +3,8 @@ package pl.rasilewicz.restaurant_manager.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "main_courses")
-public class MainCourse {
+@Table(name = "additions")
+public class Addition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,4 +12,9 @@ public class MainCourse {
 
     @Column()
     private double price;
+
+    @ManyToOne
+    private Product product;
+
+    private String description;
 }
