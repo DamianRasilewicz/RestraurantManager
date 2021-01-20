@@ -12,8 +12,8 @@ import java.util.List;
 @EntityScan(basePackages = "pl.rasilewicz.restaurant_manager.entities")
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query(value = "SELECT * FROM restaurant_manager.products WHERE type_of_products = ?1" , nativeQuery = true)
-    List<Product> findProductsByType(Long typeId);
+    @Query(value = "SELECT * FROM restaurant_manager.products WHERE type_of_products_id = ?1" , nativeQuery = true)
+    List<Product> findProductsByType(Integer typeId);
 
     @Query(value = "SELECT * FROM restaurant_manager.products", nativeQuery = true)
     List<Product> findAllProducts();

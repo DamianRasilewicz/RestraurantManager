@@ -1,7 +1,7 @@
-INSERT INTO restaurant_manager.type_of_products (name) VALUE ('pizza');
-INSERT INTO restaurant_manager.type_of_products (name) VALUE ('mainCourse');
-INSERT INTO restaurant_manager.type_of_products (name) VALUE ('soup');
-INSERT INTO restaurant_manager.type_of_products (name) VALUE ('drink');
+INSERT INTO restaurant_manager.type_of_products (name) VALUE ('Pizza');
+INSERT INTO restaurant_manager.type_of_products (name) VALUE ('Danie Główne');
+INSERT INTO restaurant_manager.type_of_products (name) VALUE ('Zupy');
+INSERT INTO restaurant_manager.type_of_products (name) VALUE ('Napoje');
 
 INSERT INTO restaurant_manager.additions (description, name, price) VALUES ('for pizza', 'Podwójny ser', 2);
 INSERT INTO restaurant_manager.additions (description, name, price) VALUES ('for pizza', 'Salami', 2);
@@ -21,7 +21,7 @@ INSERT INTO restaurant_manager.products (name, type_of_products_id, quantity, pr
 INSERT INTO restaurant_manager.products (name, type_of_products_id, quantity, price, final_price) VALUES ('Placek po wegiersku', 2, 1, 27, 27);
 
 INSERT INTO restaurant_manager.products (name, type_of_products_id, quantity, price, final_price) VALUES ('Pomidorowa', 3, 1, 12, 12);
-INSERT INTO restaurant_manager.products (name, type_of_products_id, quantity, price, final_price) VALUES ('Rosól', 3, 1, 10, 10);
+INSERT INTO restaurant_manager.products (name, type_of_products_id, quantity, price, final_price) VALUES ('Rosół    ', 3, 1, 10, 10);
 
 INSERT INTO restaurant_manager.products (name, type_of_products_id, quantity, price, final_price) VALUES ('Kawa', 4, 1, 5, 5);
 INSERT INTO restaurant_manager.products (name, type_of_products_id, quantity, price, final_price) VALUES ('Herbata', 4, 1, 5, 5);

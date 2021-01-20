@@ -13,42 +13,35 @@
                 <div class="dashboard-alerts">
                     <div class="alert-item alert-info">
                         <i class="fas icon-circle fa-info-circle"></i>
-                        <span class="font-weight-bold">Wartość zamówienia: 0 zł</span>
+                        <span class="font-weight-bold" th:text="'Wartość zamówienia: ' + ${session.costOfOrder} + 'zł'"></span>
+                        <br>
+                        <span class="font-weight-bold" th:text="'Liczba produktów w zamówieniu: ' + ${session.numberOfProducts}"></span>
                     </div>
                 </div>
             </div>
             <div class="m-4 p-4 border-dashed">
                 <h2 class="dashboard-content-title">
-                    <span>Ostatnio dodany plan:</span> ${lastPlan.name}
+                    <span>Menu</span>
                 </h2>
                 <table class="table">
                     <thead>
-<!--                    <c:forEach items="${lastPlanRecipeDetails}" var="entry" varStatus="theCounter">-->
-<!--                        <tr class="d-flex">-->
-<!--                            <th class="col-2">${entry.key}</th>-->
-<!--                            <th class="col-7"></th>-->
-<!--                            <th class="col-1"></th>-->
-<!--                            <th class="col-2"></th>-->
-<!--                        </tr>-->
+                        <tr class="d-flex">
+                            <th class="col-2">Pizza</th>
+                            <th class="col-7"></th>
+                            <th class="col-1"></th>
+                            <th class="col-2"></th>
+                        </tr>
                     </thead>
                     <tbody class="text-color-lighter">
-<!--                    <c:forEach items="${entry.value}" var="recipe">-->
-<!--                        <tr class="d-flex">-->
-<!--                            <c:if test="${recipe.dayName== entry.key}">-->
-<!--                                <td class="col-2">-->
-<!--                                    ${recipe.mealName}-->
-<!--                                <td>-->
-<!--                                <td class="col-7">${recipe.recipeName}</td>-->
-<!--                                <td class="col-1 center">-->
-<!--                                </td>-->
-<!--                                <td class="col-2 center">-->
-<!--                                    <a href="/app/recipe/details?recipeId=${recipe.planRecipeId}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>-->
-<!--                                </td>-->
-<!--                            </c:if>-->
-<!--                        </tr>-->
-<!--                    </c:forEach>-->
+                        <tr class="d-flex" th:each="pizza,state : ${listOfPizzas}">
+                                <td class="col-2" th:text="${state.count}"><td>
+                                <td class="col-7" th:text="${pizza.getName()}"></td>
+                                <td class="col-1 center" th:text="${pizza.getPrice()} + ' zł'"></td>
+                                <td class="col-2 center">
+                                    <a href="/app/recipe/details?recipeId=${recipe.planRecipeId}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
+                                </td>
+                        </tr>
                     </tbody>
-<!--                    </c:forEach>-->
                 </table>
             </div>
         </div>

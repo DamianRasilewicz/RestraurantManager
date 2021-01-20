@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<Product> findProductsByType(Long typeId) {
+    public List<Product> findProductsByType(Integer typeId) {
         return productRepository.findProductsByType(typeId);
     }
 
