@@ -1,10 +1,13 @@
 package pl.rasilewicz.restaurant_manager.entities;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 @Table(name = "additions")
 public class Addition {
 

@@ -8,4 +8,6 @@ public interface ProductService {
     List<Product> findProductsByType(Integer typeId);
 
     List<Product> findAllProducts();
+
+    Product findProductById(Long id);
 }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:include="/header :: head"></head>
+<body>
+<span th:replace="/header :: header"></span>
+<section class="dashboard-section">
+    <div class="row dashboard-nowrap">
+        <span th:replace="/leftPanel :: leftPanel"></span>
+
+        <div class="m-4 p-4 width-medium" th:style="'background:url(' + @{/img/image.png} + ')'">
+            <div class="dashboard-header m-4">
+                <div class="dashboard-alerts">
+                    <div class="alert-item alert-info">
+                        <i class="fas icon-circle fa-info-circle"></i>
+                        <span class="font-weight-bold" th:text="'Wartość zamówienia: ' + ${session.costOfOrder} + 'zł'"></span>
+                        <br>
+                        <span class="font-weight-bold" th:text="'Liczba produktów w zamówieniu: ' + ${session.numberOfProducts}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="m-4 p-4 border-dashed">
+                <h2 class="dashboard-content-title">
+                    <span>Menu</span>
+                </h2>
+                <div class="dashboard-section">
+                    <h2 class="dashboard-content" th:text="'Pizza ' + ${selectedPizza.getName()}"></h2>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr class="d-flex">
+                            <th class="col-2">Dodatki</th>
+                            <th class="col-7"></th>
+                            <th class="col-1"></th>
+                            <th class="col-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-color-lighter">
+                        <tr class="d-flex" th:each="addition : ${pizzaToppings}">
+                                <td class="col-7" th:text="${addition.getName()}"></td>
+                                <td class="col-1 center" th:text="${addition.getPrice()} + ' zł'"></td>
+                                <td class="col-2 center">
+                                </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a th:href="@{/order/pizza}" class="btn btn-warning rounded-0 text-light m-1">Zamów</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<span th:replace="/footer :: footer"></span>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package pl.rasilewicz.restaurant_manager.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.rasilewicz.restaurant_manager.entities.Addition;
 import pl.rasilewicz.restaurant_manager.repositories.AdditionRepository;
@@ -11,6 +12,7 @@ public class AdditionServiceImpl implements AdditionService{
 
     private final AdditionRepository additionRepository;
 
+    @Autowired
     public AdditionServiceImpl(AdditionRepository additionRepository) {
         this.additionRepository = additionRepository;
     }
