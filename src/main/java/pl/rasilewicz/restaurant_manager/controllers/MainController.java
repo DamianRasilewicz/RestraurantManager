@@ -3,6 +3,7 @@ package pl.rasilewicz.restaurant_manager.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import pl.rasilewicz.restaurant_manager.entities.Order;
 import pl.rasilewicz.restaurant_manager.entities.Product;
 import pl.rasilewicz.restaurant_manager.services.ProductServiceImpl;
 
@@ -33,11 +34,16 @@ public class MainController {
         List<Product> listOfDrinks = productService.findProductsByType(4);
         model.addAttribute("listOfDrinks", listOfDrinks);
 
+
+
         double costOfOrder = 0.00;
         session.setAttribute("costOfOrder", costOfOrder);
 
         int numberOfProducts = 0;
         session.setAttribute("numberOfProducts", numberOfProducts);
+
+        Order order = new Order();
+        session.setAttribute("order", order);
 
     return "mainPage/index";
     }
