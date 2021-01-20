@@ -24,7 +24,7 @@
                     <span>Menu</span>
                 </h2>
                 <table class="table">
-                    <thead th:each="">
+                    <thead>
                         <tr class="d-flex">
                             <th class="col-2">Pizza</th>
                             <th class="col-7"></th>
@@ -38,9 +38,69 @@
                                 <td class="col-7" th:text="${pizza.getName()}"></td>
                                 <td class="col-1 center" th:text="${pizza.getPrice()} + ' zł'"></td>
                                 <td class="col-2 center">
-                                    <a href="/app/recipe/details?recipeId=${recipe.planRecipeId}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
+                                    <a href="/app/recipe/details?recipeId=${recipe.planRecipeId}" class="btn btn-warning rounded-0 text-light m-1">Zamów</a>
                                 </td>
                         </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                    <tr class="d-flex">
+                        <th class="col-2">Danie Główne</th>
+                        <th class="col-7"></th>
+                        <th class="col-1"></th>
+                        <th class="col-2"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-color-lighter">
+                    <tr class="d-flex" th:each="mainCourse,state : ${listOfMainCourses}">
+                        <td class="col-2" th:text="${state.count}"><td>
+                        <td class="col-7" th:text="${mainCourse.getName()}"></td>
+                        <td class="col-1 center" th:text="${mainCourse.getPrice()} + ' zł'"></td>
+                        <td class="col-2 center">
+                            <a href="/app/recipe/details?recipeId=${recipe.planRecipeId}" class="btn btn-warning rounded-0 text-light m-1">Zamów</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                    <tr class="d-flex">
+                        <th class="col-2">Zupy</th>
+                        <th class="col-7"></th>
+                        <th class="col-1"></th>
+                        <th class="col-2"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-color-lighter">
+                    <tr class="d-flex" th:each="soup,state : ${listOfSoups}">
+                        <td class="col-2" th:text="${state.count}"><td>
+                        <td class="col-7" th:text="${soup.getName()}"></td>
+                        <td class="col-1 center" th:text="${soup.getPrice()} + ' zł'"></td>
+                        <td class="col-2 center">
+                            <a href="/app/recipe/details?recipeId=${recipe.planRecipeId}" class="btn btn-warning rounded-0 text-light m-1">Zamów</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                    <tr class="d-flex">
+                        <th class="col-2">Napoje</th>
+                        <th class="col-7"></th>
+                        <th class="col-1"></th>
+                        <th class="col-2"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-color-lighter">
+                    <tr class="d-flex" th:each="drink,state : ${listOfDrinks}">
+                        <td class="col-2" th:text="${state.count}"><td>
+                        <td class="col-7" th:text="${drink.getName()}"></td>
+                        <td class="col-1 center" th:text="${drink.getPrice()} + ' zł'"></td>
+                        <td class="col-2 center">
+                            <a href="/app/recipe/details?recipeId=${recipe.planRecipeId}" class="btn btn-warning rounded-0 text-light m-1">Zamów</a>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

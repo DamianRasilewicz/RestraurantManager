@@ -5,7 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.rasilewicz.restaurant_manager.entities.Order;
 import pl.rasilewicz.restaurant_manager.entities.Product;
+import pl.rasilewicz.restaurant_manager.entities.TypeOfProduct;
 import pl.rasilewicz.restaurant_manager.services.ProductServiceImpl;
+import pl.rasilewicz.restaurant_manager.services.TypeOfProductsServiceImpl;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -14,9 +16,11 @@ import java.util.List;
 public class MainController {
 
     private final ProductServiceImpl productService;
+    private final TypeOfProductsServiceImpl typeOfProductsService;
 
-    public MainController(ProductServiceImpl productService) {
+    public MainController(ProductServiceImpl productService, TypeOfProductsServiceImpl typeOfProductsService) {
         this.productService = productService;
+        this.typeOfProductsService = typeOfProductsService;
     }
 
     @GetMapping("/")
@@ -34,7 +38,8 @@ public class MainController {
         List<Product> listOfDrinks = productService.findProductsByType(4);
         model.addAttribute("listOfDrinks", listOfDrinks);
 
-
+        List<TypeOfProduct> listOfTypesOfProduct = typeOfProductsService.findAllTypesOfProduct();
+        model.addAttribute("listOfTypesOfProduct", listOfTypesOfProduct);
 
         double costOfOrder = 0.00;
         session.setAttribute("costOfOrder", costOfOrder);
