@@ -47,14 +47,24 @@ public class MainCourseController {
 
         double costOfOrder = 0.00;
 
-        List<Addition> selectedAdditionsList = new ArrayList<>();
+        if (selectedAdditions != null) {
 
-        for (Integer additionId :selectedAdditions) {
-            selectedAdditionsList.add(additionService.findAdditionById(additionId));
-        }
+            List<Addition> selectedAdditionsList = new ArrayList<>();
 
-        for (Addition addition : selectedAdditionsList) {
-            costOfOrder = costOfOrder + addition.getPrice();
+            for (Integer additionId : selectedAdditions) {
+                selectedAdditionsList.add(additionService.findAdditionById(additionId));
+            }
+
+            for (Addition addition : selectedAdditionsList) {
+                costOfOrder = costOfOrder + addition.getPrice();
+            }
+
+            selectedMainCourse.setAdditions(selectedAdditionsList);
+        }else {
+
+            List<Addition> selectedAdditionsList = new ArrayList<>();
+            selectedMainCourse.setAdditions(selectedAdditionsList);
+
         }
 
         costOfOrder = costOfOrder + selectedMainCourse.getPrice();
@@ -62,8 +72,6 @@ public class MainCourseController {
         order.setOrderCost(order.getOrderCost() + costOfOrder);
 
         order.setNumberOfProducts(order.getNumberOfProducts() + 1);
-
-        selectedMainCourse.setAdditions(selectedAdditionsList);
 
         if (order.getProducts() == null) {
             List<Product> listProductsInOrder = new ArrayList<>();

@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.rasilewicz.restaurant_manager.entities.Addition;
@@ -51,14 +50,24 @@ public class PizzaController {
 
         double costOfOrder = 0.00;
 
-        List<Addition> selectedAdditionsList = new ArrayList<>();
+        if (selectedAdditions != null) {
 
-        for (Integer additionId :selectedAdditions) {
-            selectedAdditionsList.add(additionService.findAdditionById(additionId));
-        }
+            List<Addition> selectedAdditionsList = new ArrayList<>();
 
-        for (Addition addition : selectedAdditionsList) {
-            costOfOrder = costOfOrder + addition.getPrice();
+            for (Integer additionId : selectedAdditions) {
+                selectedAdditionsList.add(additionService.findAdditionById(additionId));
+            }
+
+            for (Addition addition : selectedAdditionsList) {
+                costOfOrder = costOfOrder + addition.getPrice();
+            }
+
+            selectedPizza.setAdditions(selectedAdditionsList);
+        }else {
+
+            List<Addition> selectedAdditionsList = new ArrayList<>();
+            selectedPizza.setAdditions(selectedAdditionsList);
+
         }
 
         costOfOrder = costOfOrder + selectedPizza.getPrice();
@@ -66,8 +75,6 @@ public class PizzaController {
         order.setOrderCost(order.getOrderCost() + costOfOrder);
 
         order.setNumberOfProducts(order.getNumberOfProducts() + 1);
-
-        selectedPizza.setAdditions(selectedAdditionsList);
 
         if (order.getProducts() == null) {
             List<Product> listProductsInOrder = new ArrayList<>();
