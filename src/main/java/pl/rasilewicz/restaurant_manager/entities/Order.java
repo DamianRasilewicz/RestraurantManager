@@ -1,10 +1,15 @@
 package pl.rasilewicz.restaurant_manager.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "orders")
 public class Order {
 
@@ -21,5 +26,9 @@ public class Order {
 
     @ManyToMany
     private List<Product> products = new ArrayList<>();
+
+    private double orderCost;
+
+    private Integer numberOfProducts;
 
 }

@@ -15,4 +15,8 @@ public interface AdditionRepository extends JpaRepository<Addition, Integer> {
 
     @Query(value = "SELECT * FROM restaurant_manager.additions WHERE description = ?1" , nativeQuery = true)
     List<Addition> findAdditionsByDescription(String description);
+
+    Addition findAdditionById(Integer id);
+
+    Addition findAdditionByName(String name);
 }

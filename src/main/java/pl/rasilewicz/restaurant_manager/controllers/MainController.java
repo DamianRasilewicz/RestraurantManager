@@ -37,17 +37,12 @@ public class MainController {
         List<Product> listOfDrinks = productService.findProductsByType(4);
         model.addAttribute("listOfDrinks", listOfDrinks);
 
-//        List<TypeOfProduct> listOfTypesOfProduct = typeOfProductsService.findAllTypesOfProduct();
-//        model.addAttribute("listOfTypesOfProduct", listOfTypesOfProduct);
-
-        double costOfOrder = 0.00;
-        session.setAttribute("costOfOrder", costOfOrder);
-
-        int numberOfProducts = 0;
-        session.setAttribute("numberOfProducts", numberOfProducts);
-
-        Order order = new Order();
-        session.setAttribute("order", order);
+        if (session.getAttribute("order") == null) {
+            Order order = new Order();
+            order.setNumberOfProducts(0);
+            order.setOrderCost(0.00);
+            session.setAttribute("order", order);
+        }
 
     return "mainPage/index";
     }

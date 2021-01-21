@@ -7,4 +7,8 @@ import java.util.List;
 public interface AdditionService {
 
     List<Addition> findAdditionsByDescription(String description);
+
+    Addition findAdditionById(Integer id);
+
+    Addition findAdditionByName(String name);
 }

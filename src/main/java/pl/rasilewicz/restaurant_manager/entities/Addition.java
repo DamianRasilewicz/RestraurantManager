@@ -3,8 +3,7 @@ package pl.rasilewicz.restaurant_manager.entities;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Getter
@@ -22,9 +21,13 @@ public class Addition {
 
     private String description;
 
-    @ManyToMany(mappedBy = "additions")
-    private List<Product> products = new ArrayList<>();
-
-
-
+    @Override
+    public String toString() {
+        return "Addition{" +
+                "id=" + id +
+                ", price=" + price +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

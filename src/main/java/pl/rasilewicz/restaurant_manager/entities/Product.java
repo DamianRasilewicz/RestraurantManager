@@ -22,16 +22,11 @@ public class Product {
 
     private double price;
 
-
-    private double finalPrice;
-
-    private int quantity;
-
     @OneToOne()
     @JoinColumn(name = "type_of_products_id")
     private TypeOfProduct type;
 
-    @ManyToMany
+    @OneToMany
     private List<Addition> additions = new ArrayList<>();
 
     @ManyToMany(mappedBy = "products")
@@ -40,5 +35,16 @@ public class Product {
     @ManyToMany
     private List<Ingradient> ingradients = new ArrayList<>();
 
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", type=" + type +
+                ", additions=" + additions +
+                ", orders=" + orders +
+                ", ingradients=" + ingradients +
+                '}';
+    }
 }

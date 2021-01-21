@@ -21,4 +21,14 @@ public class AdditionServiceImpl implements AdditionService{
     public List<Addition> findAdditionsByDescription(String description) {
         return additionRepository.findAdditionsByDescription(description);
     }
+
+    @Override
+    public Addition findAdditionById(Integer id) {
+        return additionRepository.findAdditionById(id);
+    }
+
+    @Override
+    public Addition findAdditionByName(String name) {
+        return additionRepository.findAdditionByName(name);
+    }
 }
