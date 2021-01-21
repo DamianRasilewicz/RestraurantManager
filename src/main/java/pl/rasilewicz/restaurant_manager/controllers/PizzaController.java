@@ -53,18 +53,20 @@ public class PizzaController {
             selectedAdditionsList.add(additionService.findAdditionById(additionName));
         }
 
-        logger.error(selectedAdditionsList.toString());
-
         Product selectedPizza = productService.findProductById(selectedPizzaId);
 
         selectedPizza.setAdditions(selectedAdditionsList);
 
-        List<Product> listProductsInOrder = new ArrayList<>();
-        listProductsInOrder.add(selectedPizza);
+        if (order.getProducts() == null) {
+            List<Product> listProductsInOrder = new ArrayList<>();
+            listProductsInOrder.add(selectedPizza);
+            order.setProducts(listProductsInOrder);
+        }else {
+            List<Product> listProductsInOrder = order.getProducts();
+            listProductsInOrder.add(selectedPizza);
+            order.setProducts(listProductsInOrder);
+        }
 
-        logger.error(selectedPizza.toString());
-
-        order.setProducts(listProductsInOrder);
         order.setNumberOfProducts(order.getNumberOfProducts() + 1);
 
         double costOfOrder = 0.00;
@@ -75,14 +77,9 @@ public class PizzaController {
             costOfOrder = costOfOrder + addition.getPrice();
         }
 
-        logger.error(Double.toString(costOfOrder));
-
         costOfOrder = costOfOrder + selectedPizza.getPrice();
 
         order.setOrderCost(order.getOrderCost() + costOfOrder);
-
-        logger.error(String.valueOf(order.getOrderCost()));
-
         session.setAttribute("order", order);
 
         return "redirect:/";
