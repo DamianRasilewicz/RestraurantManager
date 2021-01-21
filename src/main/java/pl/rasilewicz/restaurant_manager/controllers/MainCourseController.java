@@ -1,11 +1,8 @@
 package pl.rasilewicz.restaurant_manager.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.rasilewicz.restaurant_manager.entities.Addition;
@@ -13,41 +10,40 @@ import pl.rasilewicz.restaurant_manager.entities.Order;
 import pl.rasilewicz.restaurant_manager.entities.Product;
 import pl.rasilewicz.restaurant_manager.services.AdditionServiceImpl;
 import pl.rasilewicz.restaurant_manager.services.ProductServiceImpl;
+
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class PizzaController {
+public class MainCourseController {
 
-    private final AdditionServiceImpl additionService;
     private final ProductServiceImpl productService;
+    private final AdditionServiceImpl additionService;
 
-        public PizzaController(AdditionServiceImpl additionService, ProductServiceImpl productService) {
-        this.additionService = additionService;
+    public MainCourseController(ProductServiceImpl productService, AdditionServiceImpl additionService) {
         this.productService = productService;
+        this.additionService = additionService;
     }
 
-    private final Logger logger = LoggerFactory.getLogger(PizzaController.class);
+    @GetMapping("/order/mainCourse")
+    public String mainCourseOrdering(@RequestParam Long id, Model model){
 
-    @GetMapping("order/pizza")
-        public String pizzaOrdering(@RequestParam Long id, Model model) {
+        Product mainCourse = productService.findProductById(id);
+        model.addAttribute("selectedMainCourse", mainCourse);
 
-        Product pizza = productService.findProductById(id);
-        model.addAttribute("selectedPizza", pizza);
+        List<Addition> listOfMainCourseAdditions = additionService.findAdditionsByDescription("MainCourse");
+        model.addAttribute("mainCourseAdditions", listOfMainCourseAdditions);
 
-        List<Addition> listOfPizzaToppings = additionService.findAdditionsByDescription("Pizza");
-        model.addAttribute("pizzaToppings", listOfPizzaToppings);
-
-        return "mainPage/pizzaOrder";
+        return "/mainPage/mainCourseOrder";
     }
 
-    @PostMapping("order/pizza")
-    public String pizzaOrdered(@RequestParam Long selectedPizzaId, @RequestParam(value = "selectedAdditions", required = false) Integer[] selectedAdditions, HttpSession session){
+    @PostMapping("order/mainCourse")
+    public String mainCourseOrdered(@RequestParam Long selectedMainCourseId, @RequestParam(value = "selectedAdditions", required = false) Integer[] selectedAdditions, HttpSession session){
 
         Order order = (Order) session.getAttribute("order");
 
-        Product selectedPizza = productService.findProductById(selectedPizzaId);
+        Product selectedMainCourse = productService.findProductById(selectedMainCourseId);
 
         double costOfOrder = 0.00;
 
@@ -61,21 +57,21 @@ public class PizzaController {
             costOfOrder = costOfOrder + addition.getPrice();
         }
 
-        costOfOrder = costOfOrder + selectedPizza.getPrice();
+        costOfOrder = costOfOrder + selectedMainCourse.getPrice();
 
         order.setOrderCost(order.getOrderCost() + costOfOrder);
 
         order.setNumberOfProducts(order.getNumberOfProducts() + 1);
 
-        selectedPizza.setAdditions(selectedAdditionsList);
+        selectedMainCourse.setAdditions(selectedAdditionsList);
 
         if (order.getProducts() == null) {
             List<Product> listProductsInOrder = new ArrayList<>();
-            listProductsInOrder.add(selectedPizza);
+            listProductsInOrder.add(selectedMainCourse);
             order.setProducts(listProductsInOrder);
         }else {
             List<Product> listProductsInOrder = order.getProducts();
-            listProductsInOrder.add(selectedPizza);
+            listProductsInOrder.add(selectedMainCourse);
             order.setProducts(listProductsInOrder);
         }
 

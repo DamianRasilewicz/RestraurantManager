@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body th:fragment="dashboardHeader">
+<div class="m-4 p-4 width-medium" th:style="'background:url(' + @{/img/image.png} + ')'">
+    <div class="dashboard-header m-4">
+        <div class="dashboard-alerts">
+            <div class="alert-item alert-info">
+                <i class="fas icon-circle fa-info-circle"></i>
+                <span class="font-weight-bold" th:text="'Wartość zamówienia: ' + ${session.order.getOrderCost()} + ' zł'"></span>
+                <br>
+                <span class="font-weight-bold" th:text="'Liczba produktów w zamówieniu: ' + ${session.order.getNumberOfProducts()}"></span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

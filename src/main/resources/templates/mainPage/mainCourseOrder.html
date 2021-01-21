@@ -13,9 +13,9 @@
                     <span>Menu</span>
                 </h2>
                 <div class="dashboard-section">
-                    <h2 class="dashboard-content" th:text="'Pizza ' + ${selectedPizza.getName()} + ' ' + ${selectedPizza.getPrice()} + ' zł'"></h2>
+                    <h2 class="dashboard-content" th:text="${selectedMainCourse.getName()} + ' ' + ${selectedMainCourse.getPrice() + ' zł'}"></h2>
                 </div>
-                <form method="POST" th:action="@{/order/pizza}">
+                <form method="POST" th:action="@{/order/mainCourse}">
                 <table class="table">
                     <thead>
                         <tr class="d-flex">
@@ -26,7 +26,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-color-lighter">
-                        <tr class="d-flex" th:each="addition, state : ${pizzaToppings}">
+                        <tr class="d-flex" th:each="addition, state : ${mainCourseAdditions}">
                                 <td class="col-7" th:text="${addition.getName()}"></td>
                                 <td class="col-1 center" th:text="${addition.getPrice()} + ' zł'"></td>
                                 <td class="col-4 center">
@@ -36,7 +36,7 @@
                         </tr>
                     </tbody>
                 </table>
-                    <input hidden name="selectedPizzaId" th:value="${selectedPizza.getId()}">
+                    <input hidden name="selectedMainCourseId" th:value="${selectedMainCourse.getId()}">
                   <button type="submit" class="btn btn-warning rounded-0 text-light m-1">Dodaj do zamówienia</button>
                 </form>
             </div>
