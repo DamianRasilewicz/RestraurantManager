@@ -5,10 +5,8 @@
     <div class="dashboard-header m-4">
         <div class="dashboard-alerts">
             <div class="alert-item alert-info">
-                <i class="fas icon-circle fa-info-circle"></i>
                 <span class="font-weight-bold" th:text="'Wartość zamówienia: ' + ${session.order.getOrderCost()} + ' zł'"></span>
-                <br>
-                <span class="font-weight-bold" th:text="'Liczba produktów w zamówieniu: ' + ${session.order.getNumberOfProducts()}"></span>
+                <span class="font-weight-bold" th:text="'Liczba produktów: ' + ${session.order.getNumberOfProducts()}"></span>
             </div>
         </div>
     </div>
