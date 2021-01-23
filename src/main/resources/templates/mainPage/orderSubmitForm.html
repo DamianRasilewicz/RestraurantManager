@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:include="/header :: head"></head>
+<body>
+<span th:replace="/header :: header"></span>
+<section class="dashboard-section">
+    <div class="row dashboard-nowrap">
+        <span th:replace="/leftPanel :: leftPanel"></span>
+
+        <div class="m-4 p-4 width-medium" th:style="'background:url(' + @{/img/image.png} + ')'">
+            <div class="dashboard-header m-4">
+            </div>
+            <form>
+            <div class="m-4 p-4 border-dashed">
+                <h2 class="dashboard-content-title">
+                    <span>Złóż zamówienie</span>
+                </h2>
+                <div class="schedules-content">
+
+                    <div class="form-group row">
+                        <label for="planName" class="col-sm-2 label-size col-form-label">
+                            Nazwa planu
+                        </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="planName" placeholder="Nazwa planu">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="planDescription" class="col-sm-2 label-size col-form-label">
+                            Opis planu
+                        </label>
+                        <div class="col-sm-10">
+                                <textarea class="form-control" rows="5" id="planDescription"
+                                          placeholder="Opis plany"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col d-flex justify-content-end mb-2 noPadding">
+                    <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</button>
+                </div>
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<span th:replace="/footer :: footer"></span>
+</body>
+</html>

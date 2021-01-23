@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.rasilewicz.restaurant_manager.entities.Order;
 import pl.rasilewicz.restaurant_manager.entities.Product;
+import pl.rasilewicz.restaurant_manager.services.OrderServiceImpl;
 import pl.rasilewicz.restaurant_manager.services.ProductServiceImpl;
 import java.util.List;
 
@@ -15,10 +16,11 @@ import javax.servlet.http.HttpSession;
 public class OrderController {
 
     private final ProductServiceImpl productService;
+    private final OrderServiceImpl orderService;
 
-
-    public OrderController(ProductServiceImpl productService) {
+    public OrderController(ProductServiceImpl productService, OrderServiceImpl orderService) {
         this.productService = productService;
+        this.orderService = orderService;
     }
 
     @GetMapping("/order/basket")
@@ -34,8 +36,11 @@ public class OrderController {
     }
 
     @GetMapping("/order/submit")
-    public String orderSubmitForm (@RequestParam Long id, Model model){
+    public String orderSubmitForm (@RequestParam Long id, HttpSession session, Model model){
 
-        Order order =
+        Order order = (Order) session.getAttribute("order");
+        model.addAttribute("order", order);
+
+        return "mainPage/orderSubmitForm";
     }
 }

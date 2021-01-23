@@ -27,7 +27,7 @@
                                 <td class="col-7" th:text="${pizza.getName()}"></td>
                                 <td class="col-1 center" th:text="${pizza.getPrice()} + ' zł'"></td>
                                 <td class="col-2 center">
-                                    <a th:href="@{/order/pizza(id=${pizza.getId()})}" class="btn btn-warning rounded-0 text-light m-1">Zamów</a>
+                                    <a th:href="@{/order/pizza(id=${pizza.getId()})}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zamów</a>
                                 </td>
                         </tr>
                     </tbody>
@@ -47,7 +47,7 @@
                         <td class="col-7" th:text="${mainCourse.getName()}"></td>
                         <td class="col-1 center" th:text="${mainCourse.getPrice()} + ' zł'"></td>
                         <td class="col-2 center">
-                            <a th:href="@{/order/mainCourse(id=${mainCourse.getId()})}" class="btn btn-warning rounded-0 text-light m-1">Zamów</a>
+                            <a th:href="@{/order/mainCourse(id=${mainCourse.getId()})}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zamów</a>
                         </td>
                     </tr>
                     </tbody>
@@ -67,7 +67,7 @@
                         <td class="col-7" th:text="${soup.getName()}"></td>
                         <td class="col-1 center" th:text="${soup.getPrice()} + ' zł'"></td>
                         <td class="col-2 center">
-                            <a th:href="@{/order/soup(id=${soup.getId()})}" class="btn btn-warning rounded-0 text-light m-1">Zamów</a>
+                            <a th:href="@{/order/soup(id=${soup.getId()})}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zamów</a>
                         </td>
                     </tr>
                     </tbody>
@@ -87,7 +87,7 @@
                         <td class="col-7" th:text="${drink.getName()}"></td>
                         <td class="col-1 center" th:text="${drink.getPrice()} + ' zł'"></td>
                         <td class="col-2 center">
-                            <a th:href="@{/order/drink(id=${drink.getId()})}" class="btn btn-warning rounded-0 text-light m-1">Zamów</a>
+                            <a th:href="@{/order/drink(id=${drink.getId()})}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zamów</a>
                         </td>
                     </tr>
                     </tbody>
