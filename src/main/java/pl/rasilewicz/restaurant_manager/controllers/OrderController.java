@@ -3,6 +3,7 @@ package pl.rasilewicz.restaurant_manager.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.rasilewicz.restaurant_manager.entities.Order;
 import pl.rasilewicz.restaurant_manager.entities.Product;
 import pl.rasilewicz.restaurant_manager.services.ProductServiceImpl;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpSession;
 public class OrderController {
 
     private final ProductServiceImpl productService;
+
 
     public OrderController(ProductServiceImpl productService) {
         this.productService = productService;
@@ -29,5 +31,11 @@ public class OrderController {
         model.addAttribute("productsInOrder", productsInOrder);
 
         return "mainPage/ordersBasket";
+    }
+
+    @GetMapping("/order/submit")
+    public String orderSubmitForm (@RequestParam Long id, Model model){
+
+        Order order =
     }
 }

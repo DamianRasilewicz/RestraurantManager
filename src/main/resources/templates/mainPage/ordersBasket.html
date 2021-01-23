@@ -47,8 +47,12 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="dashboard-content">
                 <h2 th:text="'Kwota zamówienia: ' + ${order.getOrderCost()} + 'zł'"></h2>
-                <div class=""></div>
+                   <h1 style="text-align: end">
+                       <a th:href="@{/order/submit/(id=${order.getId()})}" class="btn btn-danger rounded-0 text-light m-1">Złóż zamówienie</a>
+                   </h1>
+                </div>
 
             </div>
         </div>
