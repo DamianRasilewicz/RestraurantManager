@@ -56,6 +56,7 @@ public class PizzaController {
 
             for (Integer additionId : selectedAdditions) {
                 selectedAdditionsList.add(additionService.findAdditionById(additionId));
+
             }
 
             for (Addition addition : selectedAdditionsList) {

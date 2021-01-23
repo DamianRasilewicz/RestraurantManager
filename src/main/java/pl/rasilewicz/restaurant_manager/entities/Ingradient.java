@@ -15,6 +15,4 @@ public class Ingradient {
     @Column()
     private String name;
 
-    @ManyToMany(mappedBy = "ingradients")
-    private List<Product> products = new ArrayList<>();
 }

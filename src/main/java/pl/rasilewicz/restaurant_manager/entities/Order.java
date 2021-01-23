@@ -18,11 +18,10 @@ public class Order {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "users_id")
-    private User user;
+    @JoinColumn(name = "person_id")
+    private Person person;
 
-    @OneToOne(mappedBy = "order")
-    private Comment comment;
+    private String comment;
 
     @ManyToMany
     private List<Product> products = new ArrayList<>();

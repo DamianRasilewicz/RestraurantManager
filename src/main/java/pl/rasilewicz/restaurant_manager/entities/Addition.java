@@ -1,12 +1,14 @@
 package pl.rasilewicz.restaurant_manager.entities;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 
 @Entity
 @Getter
+@Setter
 @Table(name = "additions")
 public class Addition {
 
@@ -21,13 +23,4 @@ public class Addition {
 
     private String description;
 
-    @Override
-    public String toString() {
-        return "Addition{" +
-                "id=" + id +
-                ", price=" + price +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }
