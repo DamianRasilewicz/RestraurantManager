@@ -38,7 +38,7 @@
                     </span>
                         <tr class="d-flex">
                             <td class="col-2">
-                                <a th:href="@{/order/product/delete(index=${state.index})}" class="btn btn-danger rounded-0 text-light m-1">Usuń produkt</a>
+                                <a th:href="@{/order/product/delete(index=${state.index})}" class="btn btn-danger-normal rounded-0 pt-0 pb-0 pr-4 pl-4">Usuń produkt</a>
                             </td>
                             <td class="col-8"></td>
                             <td class="col-2">
@@ -47,11 +47,19 @@
                         </tr>
                     </tbody>
                 </table>
+                <br>
+                <br>
                 <div class="dashboard-content">
                 <h2 th:text="'Kwota zamówienia: ' + ${order.getOrderCost()} + 'zł'"></h2>
-                   <h1 style="text-align: end">
-                       <a th:href="@{/order/submit/(id=${order.getId()})}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Złóż zamówienie</a>
-                   </h1>
+                   <br>
+                    <div class="col d-flex" style="justify-content: space-between">
+                        <span>
+                            <a th:href="@{/order/submit}" class="btn btn-danger rounded-0 pt-0 pb-0 pr-4 pl-4">Usuń zamówienie</a>
+                        </span>
+                        <span>
+                            <a th:href="@{/order/submit}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Złóż zamówienie</a>
+                        </span>
+                    </div>
                 </div>
 
             </div>

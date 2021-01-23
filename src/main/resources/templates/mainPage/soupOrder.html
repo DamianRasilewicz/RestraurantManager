@@ -17,7 +17,9 @@
                 </div>
                 <form method="POST" th:action="@{/order/soup}">
                     <input hidden name="selectedSoupId" th:value="${selectedSoup.getId()}">
-                  <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj do zamówienia</button>
+                    <div class="col d-flex justify-content-end mb-2 noPadding">
+                        <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj do zamówienia</button>
+                    </div>
                 </form>
             </div>
         </div>

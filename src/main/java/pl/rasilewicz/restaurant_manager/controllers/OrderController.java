@@ -36,7 +36,7 @@ public class OrderController {
     }
 
     @GetMapping("/order/submit")
-    public String orderSubmitForm (@RequestParam Long id, HttpSession session, Model model){
+    public String orderSubmitForm (HttpSession session, Model model){
 
         Order order = (Order) session.getAttribute("order");
         model.addAttribute("order", order);
