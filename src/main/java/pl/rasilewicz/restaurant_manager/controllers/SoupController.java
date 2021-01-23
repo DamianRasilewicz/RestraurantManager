@@ -29,7 +29,7 @@ public class SoupController {
         Product soup = productService.findProductById(id);
         model.addAttribute("selectedSoup", soup);
 
-        return "mainPage/soupOrder";
+        return "mainPages/soupOrder";
     }
 
     @PostMapping("/order/soup")

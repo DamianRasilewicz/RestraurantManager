@@ -10,7 +10,10 @@ import pl.rasilewicz.restaurant_manager.entities.*;
 import pl.rasilewicz.restaurant_manager.services.AddressServiceImpl;
 import pl.rasilewicz.restaurant_manager.services.OrderServiceImpl;
 import pl.rasilewicz.restaurant_manager.services.PersonServiceImpl;
+import pl.rasilewicz.restaurant_manager.services.ProductServiceImpl;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -21,11 +24,15 @@ public class OrderController {
     private final OrderServiceImpl orderService;
     private final PersonServiceImpl personService;
     private final AddressServiceImpl addressService;
+    private final ProductServiceImpl productService;
 
-    public OrderController(OrderServiceImpl orderService, PersonServiceImpl personService, AddressServiceImpl addressService) {
+    public OrderController(OrderServiceImpl orderService, PersonServiceImpl personService,
+                           AddressServiceImpl addressService, ProductServiceImpl productService) {
         this.orderService = orderService;
         this.personService = personService;
         this.addressService = addressService;
+        this.productService = productService;
+
     }
 
     @GetMapping("/order/basket")
@@ -37,7 +44,7 @@ public class OrderController {
         List<Product> productsInOrder = order.getProducts();
         model.addAttribute("productsInOrder", productsInOrder);
 
-        return "mainPage/ordersBasket";
+        return "mainPages/ordersBasket";
     }
 
     @GetMapping("/order/delete")
@@ -101,7 +108,7 @@ public class OrderController {
         Address address = new Address();
         model.addAttribute("address", address);
 
-        return "mainPage/orderSubmitForm";
+        return "mainPages/orderSubmitForm";
     }
 
     @PostMapping("/order/submit")
@@ -112,15 +119,23 @@ public class OrderController {
         address.setPerson(person);
         addressService.save(address);
 
-        order.setPerson(person);
         Order orderInSession = (Order) session.getAttribute("order");
         List<Product> productsInOrder = orderInSession.getProducts();
-
         order.setProducts(productsInOrder);
+
+        for (Product product : productsInOrder) {
+            productService.save(product);
+        }
+
+        order.setPerson(person);
+        order.setOrderDate(LocalDate.now());
+        order.setOrderTime(LocalTime.now());
         orderService.save(order);
 
         session.removeAttribute("order");
 
         return "redirect:/";
     }
+
+
 }

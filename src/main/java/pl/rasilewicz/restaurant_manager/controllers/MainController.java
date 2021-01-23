@@ -44,6 +44,6 @@ public class MainController {
             session.setAttribute("order", order);
         }
 
-    return "mainPage/index";
+    return "mainPages/index";
     }
 }

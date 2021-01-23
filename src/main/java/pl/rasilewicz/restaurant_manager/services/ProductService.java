@@ -7,7 +7,7 @@ public interface ProductService {
 
     List<Product> findProductsByType(Integer typeId);
 
-    List<Product> findAllProducts();
+    void save(Product product);
 
     Product findProductById(Long id);
 }

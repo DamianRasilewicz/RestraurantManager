@@ -35,7 +35,7 @@ public class MainCourseController {
         List<Addition> listOfMainCourseAdditions = additionService.findAdditionsByDescription("MainCourse");
         model.addAttribute("mainCourseAdditions", listOfMainCourseAdditions);
 
-        return "/mainPage/mainCourseOrder";
+        return "/mainPages/mainCourseOrder";
     }
 
     @PostMapping("order/mainCourse")

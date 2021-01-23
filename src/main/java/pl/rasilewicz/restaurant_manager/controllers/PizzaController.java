@@ -38,7 +38,7 @@ public class PizzaController {
         List<Addition> listOfPizzaToppings = additionService.findAdditionsByDescription("Pizza");
         model.addAttribute("pizzaToppings", listOfPizzaToppings);
 
-        return "mainPage/pizzaOrder";
+        return "mainPages/pizzaOrder";
     }
 
     @PostMapping("order/pizza")

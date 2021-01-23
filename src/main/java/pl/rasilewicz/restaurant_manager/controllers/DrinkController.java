@@ -29,7 +29,7 @@ public class DrinkController {
         Product drink = productService.findProductById(id);
         model.addAttribute("selectedDrink", drink);
 
-        return "mainPage/drinkOrder";
+        return "mainPages/drinkOrder";
     }
 
     @PostMapping("/order/drink")
