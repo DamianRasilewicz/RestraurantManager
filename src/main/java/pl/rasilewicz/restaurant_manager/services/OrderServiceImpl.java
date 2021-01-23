@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import pl.rasilewicz.restaurant_manager.entities.Order;
 import pl.rasilewicz.restaurant_manager.repositories.OrderRepository;
 
+import java.util.List;
+
 @Service
 public class OrderServiceImpl implements OrderService{
 
@@ -21,5 +23,10 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public void save(Order order) {
         orderRepository.save(order);
+    }
+
+    @Override
+    public List<Order> findAllOrders() {
+        return orderRepository.findAllOrders();
     }
 }
