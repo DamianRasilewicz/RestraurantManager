@@ -35,6 +35,18 @@ public class OrderController {
         return "mainPage/ordersBasket";
     }
 
+    @GetMapping("/order/delete")
+    public String deleteOrder (HttpSession session){
+
+        session.removeAttribute("order");
+        Order order = new Order();
+        order.setNumberOfProducts(0);
+        order.setOrderCost(0.00);
+        session.setAttribute("order", order);
+
+        return "redirect:/";
+    }
+
     @GetMapping("/order/submit")
     public String orderSubmitForm (HttpSession session, Model model){
 
