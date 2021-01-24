@@ -3,6 +3,7 @@ package pl.rasilewicz.restaurant_manager.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.rasilewicz.restaurant_manager.entities.Order;
 import pl.rasilewicz.restaurant_manager.services.OrderServiceImpl;
 
@@ -24,5 +25,14 @@ public class AdminController {
         model.addAttribute("orderList", orderList);
 
         return "admin/ordersHistory";
+    }
+
+    @GetMapping("/admin/order/history/view")
+    public String orderDetails (@RequestParam Long id, Model model){
+
+        Order order = orderService.findOrderById(id);
+        model.addAttribute("order", order);
+
+        return "admin/orderDetails";
     }
 }
