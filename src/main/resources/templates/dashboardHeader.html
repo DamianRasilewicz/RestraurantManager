@@ -4,9 +4,14 @@
 <div class="m-4 p-4 width-medium" th:style="'background:url(' + @{/img/image.png} + ')'">
     <div class="dashboard-header m-4">
         <div class="dashboard-alerts">
-            <div class="alert-item alert-info">
-                <span class="font-weight-bold" th:text="'Wartość zamówienia: ' + ${session.order.getOrderCost()} + ' zł'"></span>
-                <span class="font-weight-bold" th:text="'Liczba produktów: ' + ${session.order.getNumberOfProducts()}"></span>
+            <div class="alert-item alert-light">
+                <span class="font-weight-bold">Twój koszyk</span>
+                <span>
+                    <a th:href="@{/order/basket}" class="btn btn-warning rounded-0 text-light m-1">
+                        <i class="material-icons">shopping_cart</i>
+                        <span th:text="'(' + ${session.order.getOrderCost()} + 'zł)'"></span>
+                    </a>
+                </span>
             </div>
         </div>
     </div>
