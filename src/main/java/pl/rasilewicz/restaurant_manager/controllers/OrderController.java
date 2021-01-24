@@ -38,6 +38,13 @@ public class OrderController {
     @GetMapping("/order/basket")
     public String ordersBasket (HttpSession session, Model model){
 
+        if (session.getAttribute("order") == null) {
+            Order order = new Order();
+            order.setNumberOfProducts(0);
+            order.setOrderCost(0.00);
+            session.setAttribute("order", order);
+        }
+
         Order order = (Order) session.getAttribute("order");
         model.addAttribute("order", order);
 
