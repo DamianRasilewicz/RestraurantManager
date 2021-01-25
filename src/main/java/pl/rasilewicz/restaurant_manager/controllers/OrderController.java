@@ -3,19 +3,18 @@ package pl.rasilewicz.restaurant_manager.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 import pl.rasilewicz.restaurant_manager.entities.*;
-import pl.rasilewicz.restaurant_manager.services.AddressServiceImpl;
-import pl.rasilewicz.restaurant_manager.services.OrderServiceImpl;
-import pl.rasilewicz.restaurant_manager.services.PersonServiceImpl;
-import pl.rasilewicz.restaurant_manager.services.ProductServiceImpl;
+import pl.rasilewicz.restaurant_manager.services.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -25,13 +24,18 @@ public class OrderController {
     private final PersonServiceImpl personService;
     private final AddressServiceImpl addressService;
     private final ProductServiceImpl productService;
+    private final MailServiceImpl mailService;
+    private final TemplateEngine templateEngine;
 
     public OrderController(OrderServiceImpl orderService, PersonServiceImpl personService,
-                           AddressServiceImpl addressService, ProductServiceImpl productService) {
+                           AddressServiceImpl addressService, ProductServiceImpl productService,
+                           MailServiceImpl mailService, TemplateEngine templateEngine) {
         this.orderService = orderService;
         this.personService = personService;
         this.addressService = addressService;
         this.productService = productService;
+        this.mailService = mailService;
+        this.templateEngine = templateEngine;
 
     }
 
@@ -119,7 +123,7 @@ public class OrderController {
     }
 
     @PostMapping("/order/submit")
-    public String orderSubmitted (Order order, Person person, Address address, HttpSession session){
+    public String orderSubmitted (Order order, Person person, Address address, HttpSession session) throws MessagingException {
 
         personService.save(person);
 
@@ -138,6 +142,14 @@ public class OrderController {
         order.setOrderDate(LocalDate.now());
         order.setOrderTime(LocalTime.now());
         orderService.save(order);
+
+        Context context = new Context();
+        context.setVariable("productsInOrder", order.getProducts());
+        context.setVariable("order", order);
+        context.setVariable("person", person);
+        context.setVariable("address", address);
+        String body = templateEngine.process("mailTemplate", context);
+        mailService.sendEmail(person.getEmail(), "Twoje zamówienie w serwisie Restauracja Metapack", body);
 
         session.removeAttribute("order");
 
