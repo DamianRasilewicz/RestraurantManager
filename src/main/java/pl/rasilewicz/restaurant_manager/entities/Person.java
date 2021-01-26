@@ -6,8 +6,8 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Getter
 @Setter
+@Getter
 @Table(name = "persons")
 public class Person {
 
@@ -23,7 +23,11 @@ public class Person {
 
     private String phoneNumber;
 
-    private boolean registered = false;
+    @Column(columnDefinition = "boolean default false")
+    private boolean registered;
+
+    @Column(columnDefinition = "boolean default true")
+    private boolean enabled;
 
     private String login;
 
@@ -34,5 +38,10 @@ public class Person {
 
     @OneToOne(mappedBy = "person")
     private Address address;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "person_role", joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Role role;
 
 }

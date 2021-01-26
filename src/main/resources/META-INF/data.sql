@@ -27,9 +27,9 @@ INSERT INTO restaurant_manager.products (name, type_of_product_id, price) VALUES
 INSERT INTO restaurant_manager.products (name, type_of_product_id, price) VALUES ('Herbata', 4, 5);
 INSERT INTO restaurant_manager.products (name, type_of_product_id, price) VALUES ('Cola', 4, 5);
 
-INSERT INTO restaurant_manager.persons (name, last_name, email, phone_number, registered) VALUES ('Janusz', 'Kowalski', 'j.kowalski@gmail.com', '607710555', false);
-INSERT INTO restaurant_manager.persons (name, last_name, email, phone_number, registered) VALUES ('Piotr', 'Kwiatkowski', 'p.kwiatkowski@onet.pl', '728956327', false);
-INSERT INTO restaurant_manager.persons (name, last_name, email, phone_number, registered) VALUES ('Marcin', 'Jabłoński', 'marcinjablonski@wp.pl', '692532784', false);
+INSERT INTO restaurant_manager.persons (name, last_name, email, phone_number) VALUES ('Janusz', 'Kowalski', 'j.kowalski@gmail.com', '607710555');
+INSERT INTO restaurant_manager.persons (name, last_name, email, phone_number) VALUES ('Piotr', 'Kwiatkowski', 'p.kwiatkowski@onet.pl', '728956327');
+INSERT INTO restaurant_manager.persons (name, last_name, email, phone_number) VALUES ('Marcin', 'Jabłoński', 'marcinjablonski@wp.pl', '692532784');
 
 INSERT INTO restaurant_manager.addresses (street, building_number, postcode, city, person_id) VALUES ('Głowackiego', '44/2', '65-425', 'Zielona Góra',1);
 INSERT INTO restaurant_manager.addresses (street, building_number, postcode, city, person_id) VALUES ('Al. Wojska Polskiego', '67/5', '65-326', 'Zielona Góra',2);

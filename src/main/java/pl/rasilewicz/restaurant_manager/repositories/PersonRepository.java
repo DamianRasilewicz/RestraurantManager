@@ -9,4 +9,6 @@ import pl.rasilewicz.restaurant_manager.entities.Person;
 @EntityScan(basePackages = "pl.rasilewicz.restaurant_manager.entities")
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
+    Person findByLogin(String login);
+
 }
