@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:include="/header :: head"></head>
+<body>
+<span th:replace="/header :: header"></span>
+<section class="dashboard-section">
+    <div class="row dashboard-nowrap">
+        <span th:replace="/leftPanel :: leftPanel"></span>
+
+        <div class="m-4 p-4 width-medium" th:style="'background:url(' + @{/img/image.png} + ')'">
+            <div class="dashboard-header m-4">
+            </div>
+            <div class="m-4 p-4 border-dashed">
+                <h2 class="dashboard-content-title">
+                    <span>Twoje zamówienie</span>
+                </h2>
+                <table class="table" th:each="product, state : ${productsInOrder}">
+                    <thead>
+                        <tr class="d-flex" >
+                            <th class="col-2" th:text="${state.count} + '. ' + ${product.getName()}"></th>
+                            <th class="col-8" th:text="${product.getPrice()} + 'zł'"></th>
+                            <th class="col-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-color-lighter">
+                    <span th:switch="${product.getAdditions().size()}">
+                      <span th:case="'0'"></span>
+                       <span th:case="*">
+                        <tr class="d-flex"  th:each="addition, state : ${product.getAdditions()}">
+                                <td class="col-2" th:text="${addition.getName()}"></td>
+                                <td class="col-8" th:text="${addition.getPrice()} + 'zł'"></td>
+                                <td class="col-2 center">
+<!--                                    <a th:href="@{/order/addition/delete(id=${addition.getId()})}" class="btn btn-danger rounded-0 text-light m-1">Usuń dodatek</a>-->
+                                </td>
+                        </tr>
+                       </span>
+                    </span>
+                        <tr class="d-flex">
+                            <td class="col-2">
+                                <a th:href="@{/order/product/delete(index=${state.index})}" class="btn btn-danger-normal rounded-0 pt-0 pb-0 pr-4 pl-4">Usuń produkt</a>
+                            </td>
+                            <td class="col-8"></td>
+                            <td class="col-2">
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+                <div class="dashboard-content">
+                <h2 style="color: var(--link-color);" th:text="'Kwota zamówienia: ' + ${order.getOrderCost()} + 'zł'"></h2>
+                   <br>
+                    <div class="col d-flex" style="justify-content: space-between">
+                        <span>
+                            <a th:href="@{/order/delete}" class="btn btn-danger rounded-0 pt-0 pb-0 pr-4 pl-4">Usuń zamówienie</a>
+                        </span>
+                        <span>
+                            <a th:href="@{/order/submit}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Złóż zamówienie</a>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<span th:replace="/footer :: footer"></span>
+</body>
+</html>

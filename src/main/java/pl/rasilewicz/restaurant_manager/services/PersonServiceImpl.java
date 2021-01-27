@@ -1,5 +1,6 @@
 package pl.rasilewicz.restaurant_manager.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import pl.rasilewicz.restaurant_manager.repositories.PersonRepository;
 @Service
 public class PersonServiceImpl implements PersonService {
 
+    @Autowired
     private PersonRepository personRepository;
 
     public PersonServiceImpl(PersonRepository personRepository) {
@@ -21,14 +23,19 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String personLogin) throws UsernameNotFoundException {
-        Person person = personRepository.findByLogin(personLogin);
+    public UserDetails loadUserByUsername(String personName) throws UsernameNotFoundException {
+        Person person = personRepository.findPersonByName(personName);
         if (person == null) {
-            throw new UsernameNotFoundException("Invalid user email or password.");
+            throw new UsernameNotFoundException("Invalid login or password.");
         }
-        return new VLVUserDetails(person);
+        return new VLVPersonDetails(person);
     }
 
     public PersonServiceImpl() {
+    }
+
+    @Override
+    public Person findPersonByName(String personName) {
+        return personRepository.findPersonByName(personName);
     }
 }

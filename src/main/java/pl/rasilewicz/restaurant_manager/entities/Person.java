@@ -15,7 +15,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String firstName;
 
     private String lastName;
 
@@ -29,7 +29,7 @@ public class Person {
     @Column(columnDefinition = "boolean default true")
     private boolean enabled;
 
-    private String login;
+    private String name;
 
     private String password;
 
@@ -43,5 +43,6 @@ public class Person {
     @JoinTable(name = "person_role", joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Role role;
+
 
 }

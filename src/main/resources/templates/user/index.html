@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:include="/header :: head"></head>
+<body>
+<span th:replace="/header :: header"></span>
+<section class="dashboard-section">
+    <div class="row dashboard-nowrap">
+        <span th:replace="/leftPanel :: leftPanel"></span>
+        <span th:replace="/dashboardHeader :: dashboardHeader"></span>
+            <div class="m-4 p-4 border-dashed">
+                <h2 class="dashboard-content-title">
+                    <span>Menu</span>
+                </h2>
+                <table class="table">
+                    <thead>
+                        <tr class="d-flex">
+                            <th class="col-2">Pizza</th>
+                            <th class="col-7"></th>
+                            <th class="col-1"></th>
+                            <th class="col-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-color-lighter">
+                        <tr class="d-flex" th:each="pizza,state : ${listOfPizzas}">
+                                <td class="col-2" th:text="${state.count}"><td>
+                                <td class="col-7" th:text="${pizza.getName()}"></td>
+                                <td class="col-1 center" th:text="${pizza.getPrice()} + ' zł'"></td>
+                                <td class="col-2 center">
+                                    <a th:href="@{/order/pizza(id=${pizza.getId()})}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zamów</a>
+                                </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                    <tr class="d-flex">
+                        <th class="col-2">Danie Główne</th>
+                        <th class="col-7"></th>
+                        <th class="col-1"></th>
+                        <th class="col-2"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-color-lighter">
+                    <tr class="d-flex" th:each="mainCourse,state : ${listOfMainCourses}">
+                        <td class="col-2" th:text="${state.count}"><td>
+                        <td class="col-7" th:text="${mainCourse.getName()}"></td>
+                        <td class="col-1 center" th:text="${mainCourse.getPrice()} + ' zł'"></td>
+                        <td class="col-2 center">
+                            <a th:href="@{/order/mainCourse(id=${mainCourse.getId()})}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zamów</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                    <tr class="d-flex">
+                        <th class="col-2">Zupy</th>
+                        <th class="col-7"></th>
+                        <th class="col-1"></th>
+                        <th class="col-2"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-color-lighter">
+                    <tr class="d-flex" th:each="soup,state : ${listOfSoups}">
+                        <td class="col-2" th:text="${state.count}"><td>
+                        <td class="col-7" th:text="${soup.getName()}"></td>
+                        <td class="col-1 center" th:text="${soup.getPrice()} + ' zł'"></td>
+                        <td class="col-2 center">
+                            <a th:href="@{/order/soup(id=${soup.getId()})}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zamów</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                    <tr class="d-flex">
+                        <th class="col-2">Napoje</th>
+                        <th class="col-7"></th>
+                        <th class="col-1"></th>
+                        <th class="col-2"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-color-lighter">
+                    <tr class="d-flex" th:each="drink,state : ${listOfDrinks}">
+                        <td class="col-2" th:text="${state.count}"><td>
+                        <td class="col-7" th:text="${drink.getName()}"></td>
+                        <td class="col-1 center" th:text="${drink.getPrice()} + ' zł'"></td>
+                        <td class="col-2 center">
+                            <a th:href="@{/order/drink(id=${drink.getId()})}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zamów</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<span th:replace="/footer :: footer"></span>
+</body>
+</html>

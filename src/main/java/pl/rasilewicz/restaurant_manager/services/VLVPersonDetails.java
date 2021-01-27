@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class VLVUserDetails implements UserDetails {
+public class VLVPersonDetails implements UserDetails {
 
     private Person person;
 
-    public VLVUserDetails(Person person) {
+    public VLVPersonDetails(Person person) {
         this.person = person;
     }
 
@@ -26,7 +26,8 @@ public class VLVUserDetails implements UserDetails {
         return authorities;
     }
 
-    public Long getId() {return person.getId();
+    public Long getId() {
+        return person.getId();
     }
 
     @Override
@@ -36,7 +37,7 @@ public class VLVUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return person.getLogin();
+        return person.getName();
     }
 
     @Override
@@ -57,5 +58,9 @@ public class VLVUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return person.isEnabled();
+    }
+
+    public Person getUserDetails() {
+        return person;
     }
 }
