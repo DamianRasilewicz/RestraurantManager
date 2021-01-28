@@ -9,4 +9,5 @@ import pl.rasilewicz.restaurant_manager.entities.Address;
 @EntityScan(basePackages = "pl.rasilewicz.restaurant_manager.entities")
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
+    Address findAddressByPersonId(Long id);
 }

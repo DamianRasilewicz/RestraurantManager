@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Setter
@@ -33,8 +35,8 @@ public class Person {
 
     private String password;
 
-    @OneToOne(mappedBy = "person")
-    private Order order;
+    @OneToMany(mappedBy = "person")
+    private List<Order> orders = new ArrayList<>();
 
     @OneToOne(mappedBy = "person")
     private Address address;

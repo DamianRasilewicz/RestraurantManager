@@ -27,25 +27,25 @@
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Imię</th>
                             <td class="col-6">
-                                <input th:field="*{person.name}" class="w-100 p-1">
+                                <input th:field="*{person.firstName}" th:value="${person.getFirstName()}" class="w-100 p-1">
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Nazwisko</th>
                             <td class="col-6">
-                                <input th:field="*{person.lastName}" class="w-100 p-1">
+                                <input th:field="*{person.lastName}" th:value="${person.getLastName()}" class="w-100 p-1">
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Numer telefonu</th>
                             <td class="col-6">
-                                <input th:field="*{person.phoneNumber}" class="w-100 p-1">
+                                <input th:field="*{person.phoneNumber}" th:value="${person.getPhoneNumber()}" class="w-100 p-1">
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Email</th>
                             <td class="col-6">
-                                <input th:field="*{person.email}" class="w-100 p-1">
+                                <input th:field="*{person.email}" th:value="${person.getEmail()}" class="w-100 p-1">
                             </td>
                         </tr>
 
@@ -56,31 +56,51 @@
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Ulica</th>
                             <td class="col-6">
-                                <input th:field="*{address.street}" class="w-100 p-1">
+                                <span th:switch="${person.getAddress().getStreet()}">
+                                  <span th:case="'0'"></span>
+                                     <span th:case="*">
+                                <input th:field="*{address.street}" th:value="${person.getAddress().getStreet()}" class="w-100 p-1">
+                                     </span>
+                                </span>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Number budynku</th>
                             <td class="col-1">
-                                <input th:field="*{address.buildingNumber}" class="w-100 p-1">
+                                <span th:switch="${person.getAddress().getBuildingNumber()}">
+                                  <span th:case="'0'"></span>
+                                     <span th:case="*">
+                                <input th:field="*{address.buildingNumber}" th:value="${person.getAddress().getBuildingNumber()}" class="w-100 p-1">
+                                     </span>
+                                </span>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Kod pocztowy</th>
                             <td class="col-1">
-                                <input th:field="*{address.postcode}" class="w-100 p-1">
+                                <span th:switch="${person.getAddress().getPostcode()}">
+                                  <span th:case="'0'"></span>
+                                     <span th:case="*">
+                                <input th:field="*{address.postcode}" th:value="${person.getAddress().getPostcode()}" class="w-100 p-1">
+                                     </span>
+                                </span>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Miejscowość</th>
                             <td class="col-6">
-                                <input th:field="*{address.city}" class="w-100 p-1">
+                                <span th:switch="${person.getAddress().getCity()}">
+                                  <span th:case="'0'"></span>
+                                     <span th:case="*">
+                                <input th:field="*{address.city}" th:value="${person.getAddress().getCity()}" class="w-100 p-1">
+                                     </span>
+                                </span>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Komentarz</th>
                             <td class="col-6">
-                                <textarea th:field="*{order.comment}" class="w-100 p-1" rows="5"></textarea>
+                                <textarea th:field="*{order.comment}" th:value="''" class="w-100 p-1" rows="5"></textarea>
                             </td>
                         </tr>
 

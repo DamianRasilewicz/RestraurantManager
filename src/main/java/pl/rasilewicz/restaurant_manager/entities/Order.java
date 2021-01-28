@@ -23,8 +23,7 @@ public class Order {
 
     private LocalTime orderTime;
 
-    @OneToOne
-    @JoinColumn(name = "person_id")
+    @ManyToOne
     private Person person;
 
     private String comment;

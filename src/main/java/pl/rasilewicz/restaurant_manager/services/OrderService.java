@@ -11,4 +11,6 @@ public interface OrderService {
     void save(Order order);
 
     List<Order> findAllOrders();
+
+    List<Order> findOrdersByPersonId(Long id);
 }

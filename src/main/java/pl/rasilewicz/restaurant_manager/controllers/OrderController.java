@@ -12,6 +12,7 @@ import pl.rasilewicz.restaurant_manager.services.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -263,11 +264,16 @@ public class OrderController {
         Order order = (Order) session.getAttribute("order");
         model.addAttribute("order", order);
 
-        Person person = new Person();
+        Person person = personService.findPersonByName((String) session.getAttribute("personName"));
         model.addAttribute("person", person);
 
-        Address address = new Address();
-        model.addAttribute("address", address);
+        if(person.getAddress() == null) {
+            Address address = new Address();
+            model.addAttribute("address", address);
+        }else {
+            Address address = addressService.findAddressByPersonId(person.getId());
+            model.addAttribute("address", address);
+        }
 
         return "user/orderSubmitForm";
     }
@@ -278,22 +284,22 @@ public class OrderController {
         Order order = (Order) session.getAttribute("order");
         model.addAttribute("order", order);
 
-        Person person = new Person();
+        Person person = personService.findPersonByName((String) session.getAttribute("personName"));
         model.addAttribute("person", person);
 
-        Address address = new Address();
-        model.addAttribute("address", address);
+        if(person.getAddress() == null) {
+            Address address = new Address();
+            model.addAttribute("address", address);
+        }else {
+            Address address = addressService.findAddressByPersonId(person.getId());
+            model.addAttribute("address", address);
+        }
 
         return "admin/orderSubmitForm";
     }
 
     @PostMapping("/order/submit")
     public String orderSubmitted (Order order, Person person, Address address, HttpSession session) throws MessagingException {
-
-        personService.save(person);
-
-        address.setPerson(person);
-        addressService.save(address);
 
         Order orderInSession = (Order) session.getAttribute("order");
         List<Product> productsInOrder = orderInSession.getProducts();
@@ -303,10 +309,18 @@ public class OrderController {
             productService.save(product);
         }
 
-        order.setPerson(person);
         order.setOrderDate(LocalDate.now());
         order.setOrderTime(LocalTime.now());
         orderService.save(order);
+
+        addressService.save(address);
+
+        List<Order> personOrders = new ArrayList<>();
+        personOrders.add(order);
+        person.setOrders(personOrders);
+        person.setAddress(address);
+        personService.save(person);
+
 
         Context context = new Context();
         context.setVariable("productsInOrder", order.getProducts());
@@ -324,11 +338,6 @@ public class OrderController {
     @PostMapping("/user/order/submit")
     public String orderSubmittedUser (Order order, Person person, Address address, HttpSession session) throws MessagingException {
 
-        personService.save(person);
-
-        address.setPerson(person);
-        addressService.save(address);
-
         Order orderInSession = (Order) session.getAttribute("order");
         List<Product> productsInOrder = orderInSession.getProducts();
         order.setProducts(productsInOrder);
@@ -337,10 +346,29 @@ public class OrderController {
             productService.save(product);
         }
 
-        order.setPerson(person);
         order.setOrderDate(LocalDate.now());
         order.setOrderTime(LocalTime.now());
-        orderService.save(order);
+
+        Person personFromDatabase = personService.findPersonByName((String) session.getAttribute("personName"));
+
+        Address personAddress = personFromDatabase.getAddress();
+        if (!address.getStreet().equals(personAddress.getStreet()) || !address.getBuildingNumber().equals(personAddress.getBuildingNumber())
+             || !address.getCity().equals(personAddress.getCity())){
+            addressService.save(address);
+        }
+
+
+        if (person.getFirstName().equals(personFromDatabase.getFirstName()) && person.getLastName().equals(personFromDatabase.getLastName())){
+            order.setPerson(personFromDatabase);
+            orderService.save(order);
+            
+        }else {
+            person.setAddress(address);
+            personService.save(person);
+            order.setPerson(person);
+            orderService.save(order);
+        }
+
 
         Context context = new Context();
         context.setVariable("productsInOrder", order.getProducts());
@@ -358,11 +386,6 @@ public class OrderController {
     @PostMapping("/admin/order/submit")
     public String orderSubmittedAdmin (Order order, Person person, Address address, HttpSession session) throws MessagingException {
 
-        personService.save(person);
-
-        address.setPerson(person);
-        addressService.save(address);
-
         Order orderInSession = (Order) session.getAttribute("order");
         List<Product> productsInOrder = orderInSession.getProducts();
         order.setProducts(productsInOrder);
@@ -371,10 +394,32 @@ public class OrderController {
             productService.save(product);
         }
 
-        order.setPerson(person);
         order.setOrderDate(LocalDate.now());
         order.setOrderTime(LocalTime.now());
         orderService.save(order);
+
+        Person personFromDatabase = personService.findPersonByName((String) session.getAttribute("personName"));
+
+        Address personAddress = personFromDatabase.getAddress();
+        if (!address.getStreet().equals(personAddress.getStreet()) || !address.getBuildingNumber().equals(personAddress.getBuildingNumber())
+                || address.getCity().equals(personAddress.getCity())){
+            addressService.save(address);
+        }
+
+
+        if (person.getFirstName().equals(personFromDatabase.getFirstName()) && person.getLastName().equals(personFromDatabase.getLastName())){
+            List<Order> personOrders = personFromDatabase.getOrders();
+            personOrders.add(order);
+            personFromDatabase.setOrders(personOrders);
+            personService.save(personFromDatabase);
+        }else {
+            List<Order> personOrders = new ArrayList<>();
+            personOrders.add(order);
+            person.setOrders(personOrders);
+            person.setAddress(address);
+            personService.save(person);
+        }
+
 
         Context context = new Context();
         context.setVariable("productsInOrder", order.getProducts());

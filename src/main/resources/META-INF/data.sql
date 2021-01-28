@@ -30,10 +30,14 @@ INSERT INTO restaurant_manager.products (name, type_of_product_id, price) VALUES
 INSERT INTO restaurant_manager.persons (first_name, last_name, email, phone_number) VALUES ('Janusz', 'Kowalski', 'j.kowalski@gmail.com', '607710555');
 INSERT INTO restaurant_manager.persons (first_name, last_name, email, phone_number) VALUES ('Piotr', 'Kwiatkowski', 'p.kwiatkowski@onet.pl', '728956327');
 INSERT INTO restaurant_manager.persons (first_name, last_name, email, phone_number) VALUES ('Marcin', 'Jabłoński', 'marcinjablonski@wp.pl', '692532784');
+INSERT INTO restaurant_manager.persons (first_name, last_name, email, phone_number, registered, enabled, name, password) VALUES ('Paweł', 'Pawłowski', 'rasil754@gmail.com', '725896231', true, true, 'user', '$2y$12$.uYtFPdhy7Nitw9BWEYY9eL.2oKPxfiDk4ksj12zMZgNTckkho83m');
+INSERT INTO restaurant_manager.persons (first_name, last_name, email, phone_number, registered, enabled, name, password) VALUES ('Gaweł', 'Gawłowski', 'rasil754@gmail.com', '643823948', true, true, 'admin', '$2y$12$ZqlEN1k4kBH5NjC.qCGqa.oTu598Jlr3d/aRKrLzAYX4yKIGUH/v2');
 
 INSERT INTO restaurant_manager.addresses (street, building_number, postcode, city, person_id) VALUES ('Głowackiego', '44/2', '65-425', 'Zielona Góra',1);
 INSERT INTO restaurant_manager.addresses (street, building_number, postcode, city, person_id) VALUES ('Al. Wojska Polskiego', '67/5', '65-326', 'Zielona Góra',2);
 INSERT INTO restaurant_manager.addresses (street, building_number, postcode, city, person_id) VALUES ('Sikorskiego', '29/2', '65-538', 'Zielona Góra',3);
+INSERT INTO restaurant_manager.addresses (street, building_number, postcode, city, person_id) VALUES ('Userska', '35/8', '65-284', 'Zielona Góra',4);
+INSERT INTO restaurant_manager.addresses (street, building_number, postcode, city, person_id) VALUES ('Sikorskiego', '4/3', '65-328', 'Zielona Góra',5);
 
 INSERT INTO restaurant_manager.products_additions (product_id, additions_id) VALUES (1, 1);
 INSERT INTO restaurant_manager.products_additions (product_id, additions_id) VALUES (1, 2);
@@ -55,7 +59,5 @@ INSERT INTO restaurant_manager.orders_products (order_id, products_id) VALUES (3
 INSERT INTO restaurant_manager.role (name) VALUE ('ADMIN');
 INSERT INTO restaurant_manager.role (name) VALUE ('USER');
 
-INSERT INTO restaurant_manager.persons (first_name, last_name, email, phone_number, registered, enabled, name, password) VALUES ('Paweł', 'Pawłowski', 'p.pawlowski@gmail.com', '725896231', true, true, 'user', '$2y$12$.uYtFPdhy7Nitw9BWEYY9eL.2oKPxfiDk4ksj12zMZgNTckkho83m');
 INSERT INTO restaurant_manager.person_role(role_id, person_id) VALUES (2,4);
-INSERT INTO restaurant_manager.persons (first_name, last_name, email, phone_number, registered, enabled, name, password) VALUES ('Gaweł', 'Gawłowski', 'g.gawlowski@gmail.com', '643823948', true, true, 'admin', '$2y$12$ZqlEN1k4kBH5NjC.qCGqa.oTu598Jlr3d/aRKrLzAYX4yKIGUH/v2');
 INSERT INTO restaurant_manager.person_role(role_id, person_id) VALUES (1,5);

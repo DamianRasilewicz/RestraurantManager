@@ -17,4 +17,9 @@ public class AddressServiceImpl implements AddressService{
     public void save(Address address) {
         addressRepository.save(address);
     }
+
+    @Override
+    public Address findAddressByPersonId(Long id) {
+        return addressRepository.findAddressByPersonId(id);
+    }
 }

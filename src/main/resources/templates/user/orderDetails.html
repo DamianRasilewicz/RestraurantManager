@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:include="/headerLogged :: head"></head>
+<body>
+<span th:replace="/headerLogged :: header"></span>
+<section class="dashboard-section">
+    <div class="row dashboard-nowrap">
+        <span th:replace="/leftPanelUser :: leftPanel"></span>
+
+        <div class="m-4 p-4 width-medium" th:style="'background:url(' + @{/img/image.png} + ')'">
+            <div class="dashboard-header m-4">
+            </div>
+            <div class="m-4 p-4 border-dashed">
+                <h2 class="dashboard-content-title">
+                    <span>Szczegóły zamówienia</span>
+                </h2>
+                <table class="table" th:each="product, state : ${order.getProducts()}">
+                    <thead>
+                    <tr class="d-flex" >
+                        <th class="col-2" th:text="${state.count} + '. ' + ${product.getName()}"></th>
+                        <th class="col-8" th:text="${product.getPrice()} + 'zł'"></th>
+                        <th class="col-2"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-color-lighter">
+                    <span th:switch="${product.getAdditions().size()}">
+                      <span th:case="'0'"></span>
+                       <span th:case="*">
+                        <tr class="d-flex"  th:each="addition, state : ${product.getAdditions()}">
+                                <td class="col-2" th:text="${addition.getName()}"></td>
+                                <td class="col-8" th:text="${addition.getPrice()} + 'zł'"></td>
+                                <td class="col-2 center">
+                                </td>
+                        </tr>
+                       </span>
+                    </span>
+                    <tr class="d-flex">
+                        <td class="col-2"></td>
+                        <td class="col-8"></td>
+                        <td class="col-2">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="dashboard-content">
+                    <h2 style="color: var(--link-color);" th:text="'Kwota zamówienia: ' + ${order.getOrderCost()} + 'zł'"></h2>
+                    <br>
+                    <div class="row d-flex">
+                        <div class="col-5 border-bottom border-3"><h3 class="text-uppercase">Dane personalne</h3></div>
+                        <div class="col-2"></div>
+                        <div class="col-5 border-bottom border-3"><h3 class="text-uppercase">Dane adresowe</h3></div>
+                    </div>
+                    <div class="row d-flex">
+                        <div class="col-5 p-4">
+                            <table class="table borderless">
+                            <tbody>
+
+                            <tr class="d-flex">
+                                <th scope="row" class="col-3" style="text-align: left">Imię: </th>
+                                <td class="col-6" th:text="${order.getPerson().getFirstName()}"></td>
+                            </tr>
+                            <tr class="d-flex">
+                                <th scope="row" class="col-3" style="text-align: left">Nazwisko: </th>
+                                <td class="col-6" th:text="${order.getPerson().getLastName()}"></td>
+                            </tr>
+                            <tr class="d-flex">
+                                <th scope="row" class="col-3" style="text-align: left">Email: </th>
+                                <td class="col-6" th:text="${order.getPerson().getEmail()}"></td>
+                            </tr>
+                            <tr class="d-flex">
+                                <th scope="row" class="col-3" style="text-align: left">Telefon: </th>
+                                <td class="col-6" th:text="${order.getPerson().getPhoneNumber()}"></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                            <div class="col-2"></div>
+
+                            <div class="col-5 p-4">
+                                <table class="table borderless">
+                                    <tbody>
+
+                                    <tr class="d-flex">
+                                        <th scope="row" class="col-3" style="text-align: left">Ulica: </th>
+                                        <td class="col-6" th:text="${order.getPerson().getAddress().getStreet()}"></td>
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th scope="row" class="col-3" style="text-align: left">Budynek/lokal: </th>
+                                        <td class="col-6" th:text="${order.getPerson().getAddress().getBuildingNumber()}"></td>
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th scope="row" class="col-3" style="text-align: left">Kod pocztowy: </th>
+                                        <td class="col-6" th:text="${order.getPerson().getAddress().getPostcode()}"></td>
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th scope="row" class="col-3" style="text-align: left">Miejscowość: </th>
+                                        <td class="col-6" th:text="${order.getPerson().getAddress().getCity()}"></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<span th:replace="/footer :: footer"></span>
+</body>
+</html>
