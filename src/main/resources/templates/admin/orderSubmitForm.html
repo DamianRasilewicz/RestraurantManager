@@ -6,10 +6,10 @@
 <span th:replace="/headerLogged :: header"></span>
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
-        <span th:replace="/leftPanelUser :: leftPanel"></span>
+        <span th:replace="/leftPanelAdmin :: leftPanel"></span>
         <div class="m-4 p-3 width-medium text-color-darker" th:style="'background:url(' + @{/img/image.png} + ')'">
         <div class="dashboard-content border-dashed p-3 m-4 view-height">
-            <form method="POST" th:action="@{/user/order/submit}">
+            <form method="POST" th:action="@{/admin/order/submit}">
 <!--                <input type="hidden" th:field="*{order.products}" th:value="${order.getProducts()}">-->
                 <input type="hidden" th:field="*{order.orderCost}" th:value="${order.getOrderCost()}">
                 <input type="hidden" th:field="*{order.numberOfProducts}" th:value="${order.getNumberOfProducts()}">

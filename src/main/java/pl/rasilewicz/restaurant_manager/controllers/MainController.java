@@ -44,6 +44,57 @@ public class MainController {
             session.setAttribute("order", order);
         }
 
-    return "mainPages/index";
+        return "mainPages/index";
     }
+
+    @GetMapping("/user/home")
+    public String userIndex(HttpSession session, Model model) {
+
+        List<Product> listOfPizzas = productService.findProductsByType(1);
+        model.addAttribute("listOfPizzas", listOfPizzas);
+
+        List<Product> listOfMainCourses = productService.findProductsByType(2);
+        model.addAttribute("listOfMainCourses", listOfMainCourses);
+
+        List<Product> listOfSoups = productService.findProductsByType(3);
+        model.addAttribute("listOfSoups", listOfSoups);
+
+        List<Product> listOfDrinks = productService.findProductsByType(4);
+        model.addAttribute("listOfDrinks", listOfDrinks);
+
+        if (session.getAttribute("order") == null) {
+            Order order = new Order();
+            order.setNumberOfProducts(0);
+            order.setOrderCost(0.00);
+            session.setAttribute("order", order);
+        }
+
+    return "user/index";
+    }
+
+    @GetMapping("/admin/home")
+    public String userIndexAdmin(HttpSession session, Model model) {
+
+        List<Product> listOfPizzas = productService.findProductsByType(1);
+        model.addAttribute("listOfPizzas", listOfPizzas);
+
+        List<Product> listOfMainCourses = productService.findProductsByType(2);
+        model.addAttribute("listOfMainCourses", listOfMainCourses);
+
+        List<Product> listOfSoups = productService.findProductsByType(3);
+        model.addAttribute("listOfSoups", listOfSoups);
+
+        List<Product> listOfDrinks = productService.findProductsByType(4);
+        model.addAttribute("listOfDrinks", listOfDrinks);
+
+        if (session.getAttribute("order") == null) {
+            Order order = new Order();
+            order.setNumberOfProducts(0);
+            order.setOrderCost(0.00);
+            session.setAttribute("order", order);
+        }
+
+        return "admin/index";
+    }
+
 }

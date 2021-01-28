@@ -32,6 +32,25 @@ public class DrinkController {
         return "mainPages/drinkOrder";
     }
 
+    @GetMapping("/user/order/drink")
+    public String drinkOrderingUser(@RequestParam Long id, Model model){
+
+        Product drink = productService.findProductById(id);
+        model.addAttribute("selectedDrink", drink);
+
+        return "user/drinkOrder";
+    }
+
+    @GetMapping("/admin/order/drink")
+    public String drinkOrderingAdmin(@RequestParam Long id, Model model){
+
+        Product drink = productService.findProductById(id);
+        model.addAttribute("selectedDrink", drink);
+
+        return "admin/drinkOrder";
+    }
+
+
     @PostMapping("/order/drink")
     public String drinkOrdered(@RequestParam Long selectedDrinkId, HttpSession session){
 
@@ -64,4 +83,71 @@ public class DrinkController {
 
         return "redirect:/";
     }
+
+    @PostMapping("/user/order/drink")
+    public String drinkOrderedUser(@RequestParam Long selectedDrinkId, HttpSession session){
+
+        Order order = (Order) session.getAttribute("order");
+
+        Product selectedDrink = productService.findProductById(selectedDrinkId);
+
+        double costOfOrder = 0.00;
+
+        costOfOrder = costOfOrder + selectedDrink.getPrice();
+
+        order.setOrderCost(order.getOrderCost() + costOfOrder);
+
+        order.setNumberOfProducts(order.getNumberOfProducts() + 1);
+
+        List<Addition> selectedAdditionsList = new ArrayList<>();
+        selectedDrink.setAdditions(selectedAdditionsList);
+
+        if (order.getProducts() == null) {
+            List<Product> listProductsInOrder = new ArrayList<>();
+            listProductsInOrder.add(selectedDrink);
+            order.setProducts(listProductsInOrder);
+        }else {
+            List<Product> listProductsInOrder = order.getProducts();
+            listProductsInOrder.add(selectedDrink);
+            order.setProducts(listProductsInOrder);
+        }
+
+        session.setAttribute("order", order);
+
+        return "redirect:/user/home";
+    }
+
+    @PostMapping("/admin/order/drink")
+    public String drinkOrderedUserAdmin(@RequestParam Long selectedDrinkId, HttpSession session){
+
+        Order order = (Order) session.getAttribute("order");
+
+        Product selectedDrink = productService.findProductById(selectedDrinkId);
+
+        double costOfOrder = 0.00;
+
+        costOfOrder = costOfOrder + selectedDrink.getPrice();
+
+        order.setOrderCost(order.getOrderCost() + costOfOrder);
+
+        order.setNumberOfProducts(order.getNumberOfProducts() + 1);
+
+        List<Addition> selectedAdditionsList = new ArrayList<>();
+        selectedDrink.setAdditions(selectedAdditionsList);
+
+        if (order.getProducts() == null) {
+            List<Product> listProductsInOrder = new ArrayList<>();
+            listProductsInOrder.add(selectedDrink);
+            order.setProducts(listProductsInOrder);
+        }else {
+            List<Product> listProductsInOrder = order.getProducts();
+            listProductsInOrder.add(selectedDrink);
+            order.setProducts(listProductsInOrder);
+        }
+
+        session.setAttribute("order", order);
+
+        return "redirect:/admin/home";
+    }
+
 }

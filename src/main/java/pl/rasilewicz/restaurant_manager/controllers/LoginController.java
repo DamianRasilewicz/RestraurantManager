@@ -36,7 +36,7 @@ public class LoginController {
 
         session.setAttribute("personName", loggedInPerson.getName());
         if (loggedInPerson.getRole().getName().equals("USER")){
-            return "redirect:/";
+            return "redirect:/user/home";
         }else{
             return "redirect:/admin/home";
         }
@@ -52,7 +52,8 @@ public class LoginController {
     public String logout(SessionStatus session, HttpSession httpSession) {
         SecurityContextHolder.getContext().setAuthentication(null);
         session.setComplete();
-        httpSession.removeAttribute("personLogin");
+        httpSession.removeAttribute("personName");
+        httpSession.removeAttribute("order");
         return "redirect:/";
     }
 

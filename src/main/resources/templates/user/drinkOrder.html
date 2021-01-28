@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:include="/header :: head"></head>
+<head th:include="/headerLogged :: head"></head>
 <body>
-<span th:replace="/header :: header"></span>
+<span th:replace="/headerLogged :: header"></span>
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
-        <span th:replace="/leftPanel :: leftPanel"></span>
+        <span th:replace="/leftPanelUser :: leftPanel"></span>
         <span th:replace="/dashboardHeader :: dashboardHeader"></span>
             <div class="m-4 p-4 border-dashed">
                 <h2 class="dashboard-content-title">
@@ -15,7 +15,7 @@
                 <div class="dashboard-section">
                     <h2 class="dashboard-content" th:text="${selectedDrink.getName()} + ' ' + ${selectedDrink.getPrice() + ' zł'}"></h2>
                 </div>
-                <form method="POST" th:action="@{/order/soup}">
+                <form method="POST" th:action="@{/user/order/soup}">
                     <input hidden name="selectedSoupId" th:value="${selectedDrink.getId()}">
                     <div class="col d-flex justify-content-end mb-2 noPadding">
                         <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj do zamówienia</button>

@@ -35,10 +35,34 @@ public class MainCourseController {
         List<Addition> listOfMainCourseAdditions = additionService.findAdditionsByDescription("MainCourse");
         model.addAttribute("mainCourseAdditions", listOfMainCourseAdditions);
 
-        return "/mainPages/mainCourseOrder";
+        return "mainPages/mainCourseOrder";
     }
 
-    @PostMapping("order/mainCourse")
+    @GetMapping("/user/order/mainCourse")
+    public String mainCourseOrderingUser(@RequestParam Long id, Model model){
+
+        Product mainCourse = productService.findProductById(id);
+        model.addAttribute("selectedMainCourse", mainCourse);
+
+        List<Addition> listOfMainCourseAdditions = additionService.findAdditionsByDescription("MainCourse");
+        model.addAttribute("mainCourseAdditions", listOfMainCourseAdditions);
+
+        return "user/mainCourseOrder";
+    }
+
+    @GetMapping("/admin/order/mainCourse")
+    public String mainCourseOrderingAdmin(@RequestParam Long id, Model model){
+
+        Product mainCourse = productService.findProductById(id);
+        model.addAttribute("selectedMainCourse", mainCourse);
+
+        List<Addition> listOfMainCourseAdditions = additionService.findAdditionsByDescription("MainCourse");
+        model.addAttribute("mainCourseAdditions", listOfMainCourseAdditions);
+
+        return "admin/mainCourseOrder";
+    }
+
+    @PostMapping("/order/mainCourse")
     public String mainCourseOrdered(@RequestParam Long selectedMainCourseId, @RequestParam(value = "selectedAdditions", required = false) Integer[] selectedAdditions, HttpSession session){
 
         Order order = (Order) session.getAttribute("order");
@@ -87,4 +111,105 @@ public class MainCourseController {
 
         return "redirect:/";
     }
+
+    @PostMapping("/user/order/mainCourse")
+    public String mainCourseOrderedUser(@RequestParam Long selectedMainCourseId, @RequestParam(value = "selectedAdditions", required = false) Integer[] selectedAdditions, HttpSession session){
+
+        Order order = (Order) session.getAttribute("order");
+
+        Product selectedMainCourse = productService.findProductById(selectedMainCourseId);
+
+        double costOfOrder = 0.00;
+
+        if (selectedAdditions != null) {
+
+            List<Addition> selectedAdditionsList = new ArrayList<>();
+
+            for (Integer additionId : selectedAdditions) {
+                selectedAdditionsList.add(additionService.findAdditionById(additionId));
+            }
+
+            for (Addition addition : selectedAdditionsList) {
+                costOfOrder = costOfOrder + addition.getPrice();
+            }
+
+            selectedMainCourse.setAdditions(selectedAdditionsList);
+        }else {
+
+            List<Addition> selectedAdditionsList = new ArrayList<>();
+            selectedMainCourse.setAdditions(selectedAdditionsList);
+
+        }
+
+        costOfOrder = costOfOrder + selectedMainCourse.getPrice();
+
+        order.setOrderCost(order.getOrderCost() + costOfOrder);
+
+        order.setNumberOfProducts(order.getNumberOfProducts() + 1);
+
+        if (order.getProducts() == null) {
+            List<Product> listProductsInOrder = new ArrayList<>();
+            listProductsInOrder.add(selectedMainCourse);
+            order.setProducts(listProductsInOrder);
+        }else {
+            List<Product> listProductsInOrder = order.getProducts();
+            listProductsInOrder.add(selectedMainCourse);
+            order.setProducts(listProductsInOrder);
+        }
+
+        session.setAttribute("order", order);
+
+        return "redirect:/user/home";
+    }
+
+    @PostMapping("/admin/order/mainCourse")
+    public String mainCourseOrderedAdmin(@RequestParam Long selectedMainCourseId, @RequestParam(value = "selectedAdditions", required = false) Integer[] selectedAdditions, HttpSession session){
+
+        Order order = (Order) session.getAttribute("order");
+
+        Product selectedMainCourse = productService.findProductById(selectedMainCourseId);
+
+        double costOfOrder = 0.00;
+
+        if (selectedAdditions != null) {
+
+            List<Addition> selectedAdditionsList = new ArrayList<>();
+
+            for (Integer additionId : selectedAdditions) {
+                selectedAdditionsList.add(additionService.findAdditionById(additionId));
+            }
+
+            for (Addition addition : selectedAdditionsList) {
+                costOfOrder = costOfOrder + addition.getPrice();
+            }
+
+            selectedMainCourse.setAdditions(selectedAdditionsList);
+        }else {
+
+            List<Addition> selectedAdditionsList = new ArrayList<>();
+            selectedMainCourse.setAdditions(selectedAdditionsList);
+
+        }
+
+        costOfOrder = costOfOrder + selectedMainCourse.getPrice();
+
+        order.setOrderCost(order.getOrderCost() + costOfOrder);
+
+        order.setNumberOfProducts(order.getNumberOfProducts() + 1);
+
+        if (order.getProducts() == null) {
+            List<Product> listProductsInOrder = new ArrayList<>();
+            listProductsInOrder.add(selectedMainCourse);
+            order.setProducts(listProductsInOrder);
+        }else {
+            List<Product> listProductsInOrder = order.getProducts();
+            listProductsInOrder.add(selectedMainCourse);
+            order.setProducts(listProductsInOrder);
+        }
+
+        session.setAttribute("order", order);
+
+        return "redirect:/admin/home";
+    }
+
 }

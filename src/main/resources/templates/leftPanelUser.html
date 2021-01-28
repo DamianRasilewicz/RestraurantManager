@@ -4,16 +4,22 @@
 <body th:fragment="leftPanel">
 <ul class="nav flex-column long-bg">
     <li class="nav-item">
-        <a class="nav-link" href="/">
+        <a class="nav-link" href="/user/home">
             <span>Strona główna</span>
             <i class="fas fa-angle-right"></i>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/order/basket">
+        <a class="nav-link" href="/user/order/basket">
             <span>Twoje zamówienie</span>
             <i class="fas fa-angle-right"></i>
         </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="/user/order/history">
+        <span>Historia zamówień</span>
+        <i class="fas fa-angle-right"></i>
+    </a>
     </li>
 </ul>
 

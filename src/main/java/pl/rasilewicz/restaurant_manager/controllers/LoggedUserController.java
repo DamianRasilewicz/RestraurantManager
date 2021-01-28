@@ -10,11 +10,11 @@ import pl.rasilewicz.restaurant_manager.services.OrderServiceImpl;
 import java.util.List;
 
 @Controller
-public class AdminController {
+public class LoggedUserController {
 
     private final OrderServiceImpl orderService;
 
-    public AdminController(OrderServiceImpl orderService) {
+    public LoggedUserController(OrderServiceImpl orderService) {
         this.orderService = orderService;
     }
 

@@ -29,7 +29,7 @@ public class PizzaController {
 
     private final Logger logger = LoggerFactory.getLogger(PizzaController.class);
 
-    @GetMapping("order/pizza")
+    @GetMapping("/order/pizza")
         public String pizzaOrdering(@RequestParam Long id, Model model) {
 
         Product pizza = productService.findProductById(id);
@@ -41,7 +41,31 @@ public class PizzaController {
         return "mainPages/pizzaOrder";
     }
 
-    @PostMapping("order/pizza")
+    @GetMapping("/user/order/pizza")
+    public String pizzaOrderingUser(@RequestParam Long id, Model model) {
+
+        Product pizza = productService.findProductById(id);
+        model.addAttribute("selectedPizza", pizza);
+
+        List<Addition> listOfPizzaToppings = additionService.findAdditionsByDescription("Pizza");
+        model.addAttribute("pizzaToppings", listOfPizzaToppings);
+
+        return "user/pizzaOrder";
+    }
+
+    @GetMapping("/admin/order/pizza")
+    public String pizzaOrderingAdmin(@RequestParam Long id, Model model) {
+
+        Product pizza = productService.findProductById(id);
+        model.addAttribute("selectedPizza", pizza);
+
+        List<Addition> listOfPizzaToppings = additionService.findAdditionsByDescription("Pizza");
+        model.addAttribute("pizzaToppings", listOfPizzaToppings);
+
+        return "admin/pizzaOrder";
+    }
+
+    @PostMapping("/order/pizza")
     public String pizzaOrdered(@RequestParam Long selectedPizzaId, @RequestParam(value = "selectedAdditions", required = false) Integer[] selectedAdditions, HttpSession session){
 
         Order order = (Order) session.getAttribute("order");
@@ -91,4 +115,107 @@ public class PizzaController {
 
         return "redirect:/";
     }
+
+    @PostMapping("/user/order/pizza")
+    public String pizzaOrderedUser(@RequestParam Long selectedPizzaId, @RequestParam(value = "selectedAdditions", required = false) Integer[] selectedAdditions, HttpSession session){
+
+        Order order = (Order) session.getAttribute("order");
+
+        Product selectedPizza = productService.findProductById(selectedPizzaId);
+
+        double costOfOrder = 0.00;
+
+        if (selectedAdditions != null) {
+
+            List<Addition> selectedAdditionsList = new ArrayList<>();
+
+            for (Integer additionId : selectedAdditions) {
+                selectedAdditionsList.add(additionService.findAdditionById(additionId));
+
+            }
+
+            for (Addition addition : selectedAdditionsList) {
+                costOfOrder = costOfOrder + addition.getPrice();
+            }
+
+            selectedPizza.setAdditions(selectedAdditionsList);
+        }else {
+
+            List<Addition> selectedAdditionsList = new ArrayList<>();
+            selectedPizza.setAdditions(selectedAdditionsList);
+
+        }
+
+        costOfOrder = costOfOrder + selectedPizza.getPrice();
+
+        order.setOrderCost(order.getOrderCost() + costOfOrder);
+
+        order.setNumberOfProducts(order.getNumberOfProducts() + 1);
+
+        if (order.getProducts() == null) {
+            List<Product> listProductsInOrder = new ArrayList<>();
+            listProductsInOrder.add(selectedPizza);
+            order.setProducts(listProductsInOrder);
+        }else {
+            List<Product> listProductsInOrder = order.getProducts();
+            listProductsInOrder.add(selectedPizza);
+            order.setProducts(listProductsInOrder);
+        }
+
+        session.setAttribute("order", order);
+
+        return "redirect:/user/home";
+    }
+
+    @PostMapping("/admin/order/pizza")
+    public String pizzaOrderedAdmin(@RequestParam Long selectedPizzaId, @RequestParam(value = "selectedAdditions", required = false) Integer[] selectedAdditions, HttpSession session){
+
+        Order order = (Order) session.getAttribute("order");
+
+        Product selectedPizza = productService.findProductById(selectedPizzaId);
+
+        double costOfOrder = 0.00;
+
+        if (selectedAdditions != null) {
+
+            List<Addition> selectedAdditionsList = new ArrayList<>();
+
+            for (Integer additionId : selectedAdditions) {
+                selectedAdditionsList.add(additionService.findAdditionById(additionId));
+
+            }
+
+            for (Addition addition : selectedAdditionsList) {
+                costOfOrder = costOfOrder + addition.getPrice();
+            }
+
+            selectedPizza.setAdditions(selectedAdditionsList);
+        }else {
+
+            List<Addition> selectedAdditionsList = new ArrayList<>();
+            selectedPizza.setAdditions(selectedAdditionsList);
+
+        }
+
+        costOfOrder = costOfOrder + selectedPizza.getPrice();
+
+        order.setOrderCost(order.getOrderCost() + costOfOrder);
+
+        order.setNumberOfProducts(order.getNumberOfProducts() + 1);
+
+        if (order.getProducts() == null) {
+            List<Product> listProductsInOrder = new ArrayList<>();
+            listProductsInOrder.add(selectedPizza);
+            order.setProducts(listProductsInOrder);
+        }else {
+            List<Product> listProductsInOrder = order.getProducts();
+            listProductsInOrder.add(selectedPizza);
+            order.setProducts(listProductsInOrder);
+        }
+
+        session.setAttribute("order", order);
+
+        return "redirect:/admin/home";
+    }
+
 }
