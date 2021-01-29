@@ -9,25 +9,41 @@
         <div class="m-4 p-4 width-medium">
             <div class="m-4 p-4 border-dashed">
                 <div class="container w-25">
-                    <form class="padding-small text-center" method="post" th:action="@{/registration}" th:object="${newPerson}">
+                    <form class="padding-small text-center" method="post" th:action="@{/register}">
                         <h1 class="text-color-darker">Rejestracja</h1>
+                        <br>
                         <div class="form-group">
-                            <input type="text" class="form-control" th:field="*{firstName}" placeholder="Imię">
+                            <input type="text" class="form-control" name="firstName" placeholder="Imię">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" th:field="*{lastName}" placeholder="Nazwisko">
+                            <input type="text" class="form-control" name="lastName" placeholder="Nazwisko">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" th:field="*{name}" placeholder="Login">
+                            <input type="text" class="form-control" name="name" placeholder="Login">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" th:field="*{email}" placeholder="Email">
+                            <input type="text" class="form-control" name="email" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" th:field="*{password}" placeholder="Hasło">
+                            <input type="password" class="form-control" name="password" placeholder="Hasło">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" th:field="*{phoneNumber}" placeholder="Numer telefonu">
+                            <input type="text" class="form-control" name="phoneNumber" placeholder="Numer telefonu">
+                        </div>
+
+                        <h3 class="text-color-darker">Adres dostaw</h3>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="street" placeholder="Ulica">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="buildingNumber" placeholder="Numer domu/lokalu">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="postcode" placeholder="Kod pocztowy">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="city" placeholder="Miejscowość">
                         </div>
                         <button class="btn btn-color rounded-0" type="submit">Zarejestruj</button>
                     </form>
