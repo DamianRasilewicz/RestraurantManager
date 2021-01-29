@@ -50,15 +50,19 @@
                 <br>
                 <div class="dashboard-content">
                 <h2 style="color: var(--link-color);" th:text="'Kwota zamówienia: ' + ${order.getOrderCost()} + 'zł'"></h2>
-                   <br>
-                    <div class="col d-flex" style="justify-content: space-between">
-                        <span>
+                   <<div class="col d-flex" style="justify-content: space-between">
+                        <span th:switch="${productsInOrder.size()}" class="col d-flex" style="justify-content: space-between">
+                            <span th:case="'0'"></span>
+                            <span th:case="*" class="col d-flex" style="justify-content: space-between">
+                         <span>
                             <a th:href="@{/admin/order/delete}" class="btn btn-danger rounded-0 pt-0 pb-0 pr-4 pl-4">Usuń zamówienie</a>
-                        </span>
-                        <span>
+                         </span>
+                          <span>
                             <a th:href="@{/admin/order/submit}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Złóż zamówienie</a>
+                          </span>
+                             </span>
                         </span>
-                    </div>
+                </div>
                 </div>
 
             </div>
