@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -15,12 +16,16 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 3, message = "Niewłaściwa miejscowość")
     private String city;
 
+    @Size(min = 3, message = "Niewłaściwa ulica")
     private String street;
 
+    @Size(min = 3, message = "Niewłaściwy number budynku/lokalu")
     private String buildingNumber;
 
+    @Size(min = 3, message = "Niewłaściwy kod pocztowy")
     private String postcode;
 
     @OneToOne()

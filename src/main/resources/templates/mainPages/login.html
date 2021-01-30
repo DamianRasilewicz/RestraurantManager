@@ -11,6 +11,9 @@
                 <div class="container w-25">
                     <form class="padding-small text-center" th:action="@{/login}" method="post">
                         <h1 class="text-color-darker">Logowanie</h1>
+                        <div th:if="${param.success}">
+                            <div class="alert alert-success" style="text-align: center">You've successfully registered!</div>
+                        </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="name" name="name" placeholder="Podaj login">
                         </div>

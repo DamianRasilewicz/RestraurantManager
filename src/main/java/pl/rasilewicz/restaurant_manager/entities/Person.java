@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +19,16 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 3, message = "Imię jest za krótkie (Minimum 3 litery)")
     private String firstName;
 
+    @Size(min = 3, message = "Nazwisko jest za krótkie (Minimum 3 litery)")
     private String lastName;
 
+    @Email(message = "Niewłaściwy email")
     private String email;
 
+    @Size(min = 9, message = "Niewłaściwy numer telefonu")
     private String phoneNumber;
 
     @Column(columnDefinition = "boolean default false")
@@ -31,8 +37,10 @@ public class Person {
     @Column(columnDefinition = "boolean default true")
     private boolean enabled;
 
+    @Size(min = 3, message = "Login jest za krótki (Minimum 3 litery)")
     private String name;
 
+    @Size(min = 3, message = "Hasło jest za krótkie (Minimum 3 litery)")
     private String password;
 
     @OneToMany(mappedBy = "person")

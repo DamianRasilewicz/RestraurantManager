@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:include="/header :: head"></head>
+<body>
+<span th:replace="/header :: header"></span>
+<section class="dashboard-section">
+    <div class="row dashboard-nowrap">
+        <div class="m-4 p-4 width-medium">
+            <div class="m-4 p-4 border-dashed">
+                <div class="container w-25">
+                    <form class="padding-small text-center" method="post" th:action="@{/registration/person}" th:object="${newPerson}" >
+                        <h1 class="text-color-darker">Rejestracja</h1>
+                        <div class="form-group">
+                            <input type="text" class="form-control" th:field="*{firstName}" name="firstName" id="firstName" placeholder="Imię">
+                            <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" th:field="*{lastName}" name="lastName" id="lastName" placeholder="Nazwisko">
+                            <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" th:field="*{name}" name="name" id="name" placeholder="Login">
+                            <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" th:field="*{email}" name="email" id="email" placeholder="Email">
+                            <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" th:field="*{password}" name="password" id="password" placeholder="Hasło">
+                            <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" th:field="*{phoneNumber}" name="phoneNumber" id="phoneNumber" placeholder="Numer telefonu">
+                            <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></div>
+                        </div>
+                        <button class="btn btn-color rounded-0" type="submit">Zarejestruj</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<span th:replace="/footer :: footer"></span>
+</body>
+</html>
