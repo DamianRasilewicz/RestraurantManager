@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -22,10 +23,10 @@ public class Address {
     @Size(min = 3, message = "Niewłaściwa ulica")
     private String street;
 
-    @Size(min = 3, message = "Niewłaściwy number budynku/lokalu")
+    @Size(min = 1, message = "Niewłaściwy number budynku/lokalu")
     private String buildingNumber;
 
-    @Size(min = 3, message = "Niewłaściwy kod pocztowy")
+    @Pattern(regexp = "[0-9][0-9]-[0-9][0-9][0-9]", message = "Niewłaściwy kod pocztowy")
     private String postcode;
 
     @OneToOne()

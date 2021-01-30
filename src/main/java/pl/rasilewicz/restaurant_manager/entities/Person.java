@@ -4,8 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +24,11 @@ public class Person {
     @Size(min = 3, message = "Nazwisko jest za krótkie (Minimum 3 litery)")
     private String lastName;
 
+    @NotBlank(message = "Niewłaściwy email")
     @Email(message = "Niewłaściwy email")
     private String email;
 
-    @Size(min = 9, message = "Niewłaściwy numer telefonu")
+    @Pattern(regexp = "\\d{9}", message = "Niewłaściwy numer telefonu")
     private String phoneNumber;
 
     @Column(columnDefinition = "boolean default false")
