@@ -27,4 +27,5 @@ public class Addition {
         this.name = name;
         this.description = description;
     }
+    public Addition(){};
 }
