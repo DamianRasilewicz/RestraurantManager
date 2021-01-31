@@ -1,11 +1,13 @@
 package pl.rasilewicz.restaurant_manager.entities;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @Table(name = "type_of_products")
 public class TypeOfProduct {
 
