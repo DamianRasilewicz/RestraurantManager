@@ -39,25 +39,20 @@ INSERT INTO restaurant_manager.addresses (street, building_number, postcode, cit
 INSERT INTO restaurant_manager.addresses (street, building_number, postcode, city, person_id) VALUES ('Userska', '35/8', '65-284', 'Zielona Góra',4);
 INSERT INTO restaurant_manager.addresses (street, building_number, postcode, city, person_id) VALUES ('Sikorskiego', '4/3', '65-328', 'Zielona Góra',5);
 
-INSERT INTO restaurant_manager.products_additions (product_id, additions_id) VALUES (1, 1);
-INSERT INTO restaurant_manager.products_additions (product_id, additions_id) VALUES (1, 2);
-INSERT INTO restaurant_manager.products_additions (product_id, additions_id) VALUES (3, 1);
-INSERT INTO restaurant_manager.products_additions (product_id, additions_id) VALUES (5, 5);
-INSERT INTO restaurant_manager.products_additions (product_id, additions_id) VALUES (6, 6);
+INSERT INTO restaurant_manager.products_additions (product_id, additions_id) VALUES (1, 1), (1, 2), (3, 1), (5, 5), (6, 6);
 
-INSERT INTO restaurant_manager.orders (order_date, order_time, order_cost, number_of_products, comment, person_id) VALUES ('2021-01-05', '15:01:24',  51.0, 2, '', 1);
-INSERT INTO restaurant_manager.orders (order_date, order_time, order_cost, number_of_products, comment, person_id) VALUES ('2021-01-09', '10:20:42',  35.0, 1, '', 2);
-INSERT INTO restaurant_manager.orders (order_date, order_time, order_cost, number_of_products, comment, person_id) VALUES ('2021-01-24', '12:34:09', 51.0 , 3, '', 3);
+INSERT INTO restaurant_manager.orders (order_date, order_time, order_cost, number_of_products, comment, person_id) VALUES ('2021-01-05', '15:01:24',  51.0, 2, '', 1), ('2021-01-09', '10:20:42',  35.0, 1, '', 2),
+                                                                                                                          ('2021-01-24', '12:34:09', 51.0 , 3, '', 3);
 
-INSERT INTO restaurant_manager.orders_products (order_id, products_id) VALUES (1, 1);
-INSERT INTO restaurant_manager.orders_products (order_id, products_id) VALUES (1, 3);
-INSERT INTO restaurant_manager.orders_products (order_id, products_id) VALUES (2, 5);
-INSERT INTO restaurant_manager.orders_products (order_id, products_id) VALUES (3, 6);
-INSERT INTO restaurant_manager.orders_products (order_id, products_id) VALUES (3, 8);
-INSERT INTO restaurant_manager.orders_products (order_id, products_id) VALUES (3, 11);
+INSERT INTO restaurant_manager.orders_products (order_id, products_id) VALUES (1, 1), (1, 3), (2, 5), (3, 6), (3, 8), (3, 11);
 
-INSERT INTO restaurant_manager.role (name) VALUE ('ADMIN');
-INSERT INTO restaurant_manager.role (name) VALUE ('USER');
+INSERT INTO restaurant_manager.role (name) VALUE ('ADMIN'), ('USER');
 
-INSERT INTO restaurant_manager.person_role(role_id, person_id) VALUES (2,4);
-INSERT INTO restaurant_manager.person_role(role_id, person_id) VALUES (1,5);
+INSERT INTO restaurant_manager.person_role(role_id, person_id) VALUES (2,4), (1,5);
+
+INSERT INTO restaurant_manager.ingredients(name) VALUES ('ser'), ('cebula'), ('pieczarki'), ('czarne oliwki'), ('papryka'), ('kukurydza'),
+                                                        ('brokuły'), ('sos pomidorowy'), ('mozzarella'), ('boczek'), ('salami'), ('szynka'),
+                                                        ('czarny pieprz');
+
+INSERT INTO restaurant_manager.products_ingredients(product_id, ingredients_id) VALUES (1, 1), (1, 8), (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (3, 7), (3, 8), (3, 9),
+                                                                                       (3, 10), (3, 3), (4, 11), (4, 2), (4, 1), (4, 9), (4, 12);

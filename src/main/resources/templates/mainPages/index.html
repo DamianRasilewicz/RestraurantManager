@@ -24,7 +24,15 @@
                     <tbody class="text-color-lighter">
                         <tr class="d-flex" th:each="pizza,state : ${listOfPizzas}">
                                 <td class="col-2" th:text="${state.count}"><td>
-                                <td class="col-7" th:text="${pizza.getName()}"></td>
+                                <td class="col-3" th:text="${pizza.getName()}"></td>
+                                <td class="col-4">
+                                <text th:each="ingredient, state : ${pizza.getIngredients()}" >
+                                  <text th:switch="${pizza.getIngredients().size()}">
+                                    <text th:case="${state.index + 1}" th:text="${ingredient.getName()}"></text>
+                                    <text th:case="*" th:text="${ingredient.getName() + ', '}"></text>
+                                  </text>
+                                </text>
+                                </td>
                                 <td class="col-1 center" th:text="${pizza.getPrice()} + ' zł'"></td>
                                 <td class="col-2 center">
                                     <a th:href="@{/order/pizza(id=${pizza.getId()})}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zamów</a>

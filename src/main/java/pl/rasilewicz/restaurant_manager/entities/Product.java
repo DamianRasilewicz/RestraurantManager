@@ -30,6 +30,6 @@ public class Product {
     private List<Addition> additions = new ArrayList<>();
 
     @ManyToMany
-    private List<Ingradient> ingradients = new ArrayList<>();
+    private List<Ingredient> ingredients = new ArrayList<>();
 
 }
