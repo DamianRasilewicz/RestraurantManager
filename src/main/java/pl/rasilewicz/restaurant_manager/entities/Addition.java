@@ -23,4 +23,8 @@ public class Addition {
 
     private String description;
 
+    public Addition(String name, String description){
+        this.name = name;
+        this.description = description;
+    }
 }

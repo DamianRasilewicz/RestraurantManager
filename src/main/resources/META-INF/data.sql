@@ -46,7 +46,7 @@ INSERT INTO restaurant_manager.orders (order_date, order_time, order_cost, numbe
 
 INSERT INTO restaurant_manager.orders_products (order_id, products_id) VALUES (1, 1), (1, 3), (2, 5), (3, 6), (3, 8), (3, 11);
 
-INSERT INTO restaurant_manager.role (name) VALUE ('ADMIN'), ('USER');
+INSERT INTO restaurant_manager.role (name) VALUES ('ADMIN'), ('USER');
 
 INSERT INTO restaurant_manager.person_role(role_id, person_id) VALUES (2,4), (1,5);
 
