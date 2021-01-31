@@ -16,6 +16,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(value = "SELECT * FROM restaurant_manager.orders", nativeQuery = true)
     List<Order> findAllOrders();
 
-    @Query(value = "SELECT * FROM restaurant_manager.persons_orders WHERE person_id = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM restaurant_manager.orders WHERE person_id = ?1", nativeQuery = true)
     List<Order> findOrdersByPersonId(Long id);
 }
