@@ -16,8 +16,9 @@ import pl.rasilewicz.restaurant_manager.repositories.AdditionRepository;
 import pl.rasilewicz.restaurant_manager.repositories.ProductRepository;
 import pl.rasilewicz.restaurant_manager.repositories.TypeOfProductRepository;
 
+import javax.transaction.Transactional;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -36,6 +37,7 @@ class MainCourseControllerTest {
     private AdditionRepository additionRepository;
 
     @Test
+    @Transactional
     void mainCourseOrdering() throws Exception{
         //given
         Product testMainCourse = new Product();
@@ -67,6 +69,7 @@ class MainCourseControllerTest {
     }
 
     @Test
+    @Transactional
     void mainCourseOrdered() throws Exception{
         //given
         Product testMainCourse = new Product();
@@ -79,12 +82,6 @@ class MainCourseControllerTest {
         testMainCourse.setType(testTypeOfProduct);
         testMainCourse.setPrice(25);
         productRepository.save(testMainCourse);
-//
-//        Addition testAddition = new Addition();
-//        testAddition.setDescription("MainCourse");
-//        testAddition.setName("Salami");
-//        testAddition.setPrice(5);
-//        additionRepository.save(testAddition);
 
         //when
         Order order = new Order();
@@ -92,7 +89,8 @@ class MainCourseControllerTest {
         order.setOrderCost(0);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/order/drink?selectedDrinkId=" + testMainCourse.getId()).sessionAttr("order", order))
-                .andDo(MockMvcResultHandlers.print());
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
 
         //then
         assertThat(order.getProducts()).isNotNull();

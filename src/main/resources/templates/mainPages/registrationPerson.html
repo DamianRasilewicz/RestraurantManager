@@ -11,6 +11,8 @@
                 <div class="container w-25">
                     <form class="padding-small text-center" method="post" th:action="@{/registration/person}" th:object="${newPerson}" >
                         <h1 class="text-color-darker">Rejestracja</h1>
+                        <br>
+                        <h3 class="text-color-darker">Dane personalne</h3>
                         <div class="form-group">
                             <input type="text" class="form-control" th:field="*{firstName}" name="firstName" id="firstName" placeholder="Imię">
                             <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>

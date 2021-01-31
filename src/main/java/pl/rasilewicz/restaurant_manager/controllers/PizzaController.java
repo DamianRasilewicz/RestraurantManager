@@ -27,8 +27,6 @@ public class PizzaController {
         this.productService = productService;
     }
 
-    private final Logger logger = LoggerFactory.getLogger(PizzaController.class);
-
     @GetMapping("/order/pizza")
         public String pizzaOrdering(@RequestParam Long id, Model model) {
 

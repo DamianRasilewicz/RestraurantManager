@@ -11,6 +11,7 @@
                 <div class="container w-25">
                     <form class="padding-small text-center" method="post" th:action="@{/registration/address}" th:object="${newAddress}" >
                         <h1 class="text-color-darker">Rejestracja</h1>
+                        <br>
                         <div th:if="${param.success}">
                             <div class="alert alert-success" style="text-align: center">You've successfully registered!</div>
                         </div>

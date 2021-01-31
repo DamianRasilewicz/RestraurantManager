@@ -59,7 +59,7 @@ public class RegistrationController {
     }
 
     @GetMapping("/registration/address")
-    public String registrationFormAddress(Model model, @RequestParam String newPersonName, RedirectAttributes redirectAttributes){
+    public String registrationFormAddress(Model model, @RequestParam String newPersonName){
         Address newAddress = new Address();
         model.addAttribute("newAddress", newAddress);
 

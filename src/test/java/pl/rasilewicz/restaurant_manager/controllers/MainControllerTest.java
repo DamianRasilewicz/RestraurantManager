@@ -7,15 +7,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import pl.rasilewicz.restaurant_manager.entities.Product;
 import pl.rasilewicz.restaurant_manager.entities.TypeOfProduct;
 import pl.rasilewicz.restaurant_manager.repositories.ProductRepository;
 import pl.rasilewicz.restaurant_manager.repositories.TypeOfProductRepository;
-import pl.rasilewicz.restaurant_manager.services.ProductServiceImpl;
 
 import javax.transaction.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -81,7 +80,8 @@ class MainControllerTest {
 
         //when
         mockMvc.perform(MockMvcRequestBuilders.get("/"))
-                .andDo(MockMvcResultHandlers.print());
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().is(200));
 
         //then
     }

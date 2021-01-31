@@ -1,6 +1,5 @@
 package pl.rasilewicz.restaurant_manager.controllers;
 
-import org.aspectj.weaver.ast.Or;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -8,21 +7,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import pl.rasilewicz.restaurant_manager.entities.Order;
 import pl.rasilewicz.restaurant_manager.entities.Person;
 import pl.rasilewicz.restaurant_manager.repositories.OrderRepository;
 import pl.rasilewicz.restaurant_manager.repositories.PersonRepository;
-import pl.rasilewicz.restaurant_manager.services.OrderServiceImpl;
-
-
 import javax.transaction.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest
