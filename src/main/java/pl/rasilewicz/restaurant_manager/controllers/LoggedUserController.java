@@ -24,11 +24,9 @@ public class LoggedUserController {
     }
 
     @GetMapping("/admin/order/history")
-    public String ordersHistoryAdmin (Model model, HttpSession session){
+    public String ordersHistoryAdmin (Model model){
 
-        Person person = personService.findPersonByName((String)session.getAttribute("personName"));
-
-        List<Order> orderList = person.getOrders();
+        List<Order> orderList = orderService.findAllOrders();
         model.addAttribute("orderList", orderList);
 
         return "admin/ordersHistory";
