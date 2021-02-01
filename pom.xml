@@ -12,10 +12,10 @@
     <artifactId>restaurant_manager</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>restaurant_manager</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Restauration Metapack</description>
 
     <properties>
-        <java.version>13</java.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
