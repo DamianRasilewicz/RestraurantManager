@@ -340,59 +340,16 @@ public class OrderController {
 
         session.removeAttribute("order");
 
-        return "redirect:/";
+        return "redirect:/order/submit?success";
     }
 
     @PostMapping("/user/order/submit")
-    public String orderSubmittedUser (Order order, Person person, Address address, HttpSession session) throws MessagingException {
+    public String orderSubmittedUser (Order order, @ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
+                                  BindingResult resultAddress, HttpSession session) throws MessagingException {
 
-        Order orderInSession = (Order) session.getAttribute("order");
-        List<Product> productsInOrder = orderInSession.getProducts();
-        order.setProducts(productsInOrder);
-
-        for (Product product : productsInOrder) {
-            productService.save(product);
+        if (resultPerson.hasErrors() || resultAddress.hasErrors()) {
+            return "mainPages/orderSubmitForm";
         }
-
-        order.setOrderDate(LocalDate.now());
-        order.setOrderTime(LocalTime.now());
-
-        Person personFromDatabase = personService.findPersonByName((String) session.getAttribute("personName"));
-
-        Address personAddress = personFromDatabase.getAddress();
-        if (!address.getStreet().equals(personAddress.getStreet()) || !address.getBuildingNumber().equals(personAddress.getBuildingNumber())
-             || !address.getCity().equals(personAddress.getCity())){
-            addressService.save(address);
-        }
-
-
-        if (person.getFirstName().equals(personFromDatabase.getFirstName()) && person.getLastName().equals(personFromDatabase.getLastName())){
-            order.setPerson(personFromDatabase);
-            orderService.save(order);
-            
-        }else {
-            person.setAddress(address);
-            personService.save(person);
-            order.setPerson(person);
-            orderService.save(order);
-        }
-
-
-        Context context = new Context();
-        context.setVariable("productsInOrder", order.getProducts());
-        context.setVariable("order", order);
-        context.setVariable("person", person);
-        context.setVariable("address", address);
-        String body = templateEngine.process("mailTemplate", context);
-        mailService.sendEmail(person.getEmail(), "Twoje zamówienie w serwisie Restauracja Metapack", body);
-
-        session.removeAttribute("order");
-
-        return "redirect:/user/home";
-    }
-
-    @PostMapping("/admin/order/submit")
-    public String orderSubmittedAdmin (Order order, Person person, Address address, HttpSession session) throws MessagingException {
 
         Order orderInSession = (Order) session.getAttribute("order");
         List<Product> productsInOrder = orderInSession.getProducts();
@@ -406,27 +363,13 @@ public class OrderController {
         order.setOrderTime(LocalTime.now());
         orderService.save(order);
 
-        Person personFromDatabase = personService.findPersonByName((String) session.getAttribute("personName"));
+        addressService.save(address);
 
-        Address personAddress = personFromDatabase.getAddress();
-        if (!address.getStreet().equals(personAddress.getStreet()) || !address.getBuildingNumber().equals(personAddress.getBuildingNumber())
-                || address.getCity().equals(personAddress.getCity())){
-            addressService.save(address);
-        }
-
-
-        if (person.getFirstName().equals(personFromDatabase.getFirstName()) && person.getLastName().equals(personFromDatabase.getLastName())){
-            List<Order> personOrders = personFromDatabase.getOrders();
-            personOrders.add(order);
-            personFromDatabase.setOrders(personOrders);
-            personService.save(personFromDatabase);
-        }else {
-            List<Order> personOrders = new ArrayList<>();
-            personOrders.add(order);
-            person.setOrders(personOrders);
-            person.setAddress(address);
-            personService.save(person);
-        }
+        List<Order> personOrders = new ArrayList<>();
+        personOrders.add(order);
+        person.setOrders(personOrders);
+        person.setAddress(address);
+        personService.save(person);
 
 
         Context context = new Context();
@@ -439,7 +382,49 @@ public class OrderController {
 
         session.removeAttribute("order");
 
-        return "redirect:/admin/home";
+        return "redirect:/user/order/submit?success";
+    }
+
+    @PostMapping("/admin/order/submit")
+    public String orderSubmittedAdmin (Order order, @ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
+                                  BindingResult resultAddress, HttpSession session) throws MessagingException {
+
+        if (resultPerson.hasErrors() || resultAddress.hasErrors()) {
+            return "mainPages/orderSubmitForm";
+        }
+
+        Order orderInSession = (Order) session.getAttribute("order");
+        List<Product> productsInOrder = orderInSession.getProducts();
+        order.setProducts(productsInOrder);
+
+        for (Product product : productsInOrder) {
+            productService.save(product);
+        }
+
+        order.setOrderDate(LocalDate.now());
+        order.setOrderTime(LocalTime.now());
+        orderService.save(order);
+
+        addressService.save(address);
+
+        List<Order> personOrders = new ArrayList<>();
+        personOrders.add(order);
+        person.setOrders(personOrders);
+        person.setAddress(address);
+        personService.save(person);
+
+
+        Context context = new Context();
+        context.setVariable("productsInOrder", order.getProducts());
+        context.setVariable("order", order);
+        context.setVariable("person", person);
+        context.setVariable("address", address);
+        String body = templateEngine.process("mailTemplate", context);
+        mailService.sendEmail(person.getEmail(), "Twoje zamówienie w serwisie Restauracja Metapack", body);
+
+        session.removeAttribute("order");
+
+        return "redirect:/admin/order/submit?success";
     }
 
 }

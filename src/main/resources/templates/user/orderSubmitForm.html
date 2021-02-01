@@ -14,6 +14,10 @@
                 <input type="hidden" th:field="*{order.orderCost}" th:value="${order.getOrderCost()}">
                 <input type="hidden" th:field="*{order.numberOfProducts}" th:value="${order.getNumberOfProducts()}">
                 <div class="mt-4 ml-4 mr-4">
+                    <div th:if="${param.success}">
+                        <div class="alert alert-success" style="text-align: center">Zamówienie złożone! Otrzymasz maila z Twoim zamówieniem.</div>
+                    </div>
+                    <br>
                     <h2 class="dashboard-content-title">
                         <span>Złóż zamówienie</span>
                     </h2>
