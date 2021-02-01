@@ -27,25 +27,29 @@
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Imię</th>
                             <td class="col-6">
-                                <input th:field="*{person.name}" class="w-100 p-1">
+                                <input th:field="*{person.firstName}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('person.firstName')}" th:errors="*{person.firstName}"></div>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Nazwisko</th>
                             <td class="col-6">
                                 <input th:field="*{person.lastName}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('person.lastName')}" th:errors="*{person.lastName}"></div>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Numer telefonu</th>
                             <td class="col-6">
                                 <input th:field="*{person.phoneNumber}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('person.phoneNumber')}" th:errors="*{person.phoneNumber}"></div>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Email</th>
                             <td class="col-6">
                                 <input th:field="*{person.email}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('person.email')}" th:errors="*{person.email}"></div>
                             </td>
                         </tr>
 
@@ -57,24 +61,28 @@
                             <th scope="row" class="col-3" style="text-align: end">Ulica</th>
                             <td class="col-6">
                                 <input th:field="*{address.street}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}"></div>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Number budynku</th>
                             <td class="col-1">
                                 <input th:field="*{address.buildingNumber}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('address.buildingNumber')}" th:errors="*{address.buildingNumber}"></div>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Kod pocztowy</th>
                             <td class="col-1">
                                 <input th:field="*{address.postcode}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('address.postcode')}" th:errors="*{address.postcode}"></div>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Miejscowość</th>
                             <td class="col-6">
                                 <input th:field="*{address.city}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"></div>
                             </td>
                         </tr>
                         <tr class="d-flex">

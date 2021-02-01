@@ -30,18 +30,22 @@ public class RegistrationController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/registration/person")
+    @GetMapping("/registration")
     public String registrationFormPerson(Model model){
-        Person newPerson = new Person();
-        model.addAttribute("newPerson", newPerson);
+        Person person = new Person();
+        model.addAttribute("person", person);
 
-        return "mainPages/registrationPerson";
+        Address address = new Address();
+        model.addAttribute("address", address);
+
+        return "mainPages/registration";
     }
 
-    @PostMapping("/registration/person")
-    public String registeredPerson(@ModelAttribute("newPerson") @Valid Person newPerson, BindingResult result, RedirectAttributes redirectAttributes){
-        if (result.hasErrors()) {
-            return "mainPages/registrationPerson";
+    @PostMapping("/registration")
+    public String registeredPerson(@ModelAttribute("person") @Valid Person newPerson, BindingResult resultPerson, @ModelAttribute("address") @Valid Address newAddress,
+                                   BindingResult resultAddress){
+        if (resultPerson.hasErrors() || resultAddress.hasErrors()) {
+            return "mainPages/registration";
         }
 
         newPerson.setPassword(BCrypt.hashpw(newPerson.getPassword(), BCrypt.gensalt(12)));
@@ -54,29 +58,10 @@ public class RegistrationController {
 
         personService.save(newPerson);
 
-        redirectAttributes.addAttribute("newPersonName", newPerson.getName());
-        return "redirect:/registration/address";
-    }
-
-    @GetMapping("/registration/address")
-    public String registrationFormAddress(Model model, @RequestParam String newPersonName){
-        Address newAddress = new Address();
-        model.addAttribute("newAddress", newAddress);
-
-        model.addAttribute("newPersonName", newPersonName);
-
-        return "mainPages/registrationAddress";
-    }
-
-    @PostMapping("/registration/address")
-    public String registeredAddress(@ModelAttribute("newAddress") @Valid Address newAddress, BindingResult result, @ModelAttribute("newPersonName") String newPersonName){
-        if (result.hasErrors()) {
-            return "mainPages/registrationAddress";
-        }
-
-        newAddress.setPerson(personService.findPersonByName(newPersonName));
+        newAddress.setPerson(personService.findPersonByName(newPerson.getName()));
         addressService.save(newAddress);
 
-        return "redirect:/registration/address?success";
+        return "redirect:/registration?success";
+
     }
 }

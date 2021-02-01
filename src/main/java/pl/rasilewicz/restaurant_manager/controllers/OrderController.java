@@ -2,7 +2,9 @@ package pl.rasilewicz.restaurant_manager.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.TemplateEngine;
@@ -17,6 +19,7 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 public class OrderController {
@@ -299,7 +302,12 @@ public class OrderController {
     }
 
     @PostMapping("/order/submit")
-    public String orderSubmitted (Order order, Person person, Address address, HttpSession session) throws MessagingException {
+    public String orderSubmitted (Order order, @ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
+                                  BindingResult resultAddress, HttpSession session) throws MessagingException {
+
+        if (resultPerson.hasErrors() || resultAddress.hasErrors()) {
+            return "mainPages/orderSubmitForm";
+        }
 
         Order orderInSession = (Order) session.getAttribute("order");
         List<Product> productsInOrder = orderInSession.getProducts();
