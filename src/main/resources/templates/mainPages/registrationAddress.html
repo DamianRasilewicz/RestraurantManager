@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:include="/header :: head"></head>
+<head th:include="header :: head"></head>
 <body>
-<span th:replace="/header :: header"></span>
+<span th:replace="header :: header"></span>
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
         <div class="m-4 p-4 width-medium">
@@ -41,6 +41,6 @@
     </div>
 </section>
 
-<span th:replace="/footer :: footer"></span>
+<span th:replace="footer :: footer"></span>
 </body>
 </html>

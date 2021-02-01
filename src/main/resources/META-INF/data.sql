@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS `restaurant_manager` DEFAULT CHARACTER SET utf8 ;
+USE `restaurant_manager` ;
 
 INSERT INTO restaurant_manager.type_of_products (name) VALUE ('Pizza');
 INSERT INTO restaurant_manager.type_of_products (name) VALUE ('Danie Główne');

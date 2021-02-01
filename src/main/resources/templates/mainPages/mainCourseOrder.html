@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:include="/header :: head"></head>
+<head th:include="header :: head"></head>
 <body>
-<span th:replace="/header :: header"></span>
+<span th:replace="header :: header"></span>
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
-        <span th:replace="/leftPanel :: leftPanel"></span>
-        <span th:replace="/dashboardHeader :: dashboardHeader"></span>
+        <span th:replace="LeftPanel :: leftPanel"></span>
+        <span th:replace="dashboardHeader :: dashboardHeader"></span>
             <div class="m-4 p-4 border-dashed">
                 <h2 class="dashboard-content-title">
                     <span>Menu</span>
@@ -46,6 +46,6 @@
     </div>
 </section>
 
-<span th:replace="/footer :: footer"></span>
+<span th:replace="footer :: footer"></span>
 </body>
 </html>
