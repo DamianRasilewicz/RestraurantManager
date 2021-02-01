@@ -38,4 +38,9 @@ public class PersonServiceImpl implements PersonService {
     public Person findPersonByName(String personName) {
         return personRepository.findPersonByName(personName);
     }
+
+    @Override
+    public Person findPersonById(Long id) {
+        return personRepository.findPersonById(id);
+    }
 }

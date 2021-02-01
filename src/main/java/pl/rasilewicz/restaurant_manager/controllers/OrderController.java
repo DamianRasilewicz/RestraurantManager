@@ -267,7 +267,7 @@ public class OrderController {
         Order order = (Order) session.getAttribute("order");
         model.addAttribute("order", order);
 
-        Person person = personService.findPersonByName((String) session.getAttribute("personName"));
+        Person person = personService.findPersonById((Long) session.getAttribute("personId"));
         model.addAttribute("person", person);
 
         if(person.getAddress() == null) {
@@ -287,7 +287,7 @@ public class OrderController {
         Order order = (Order) session.getAttribute("order");
         model.addAttribute("order", order);
 
-        Person person = personService.findPersonByName((String) session.getAttribute("personName"));
+        Person person = personService.findPersonById((Long) session.getAttribute("personId"));
         model.addAttribute("person", person);
 
         if(person.getAddress() == null) {
@@ -317,15 +317,18 @@ public class OrderController {
 
         order.setOrderDate(LocalDate.now());
         order.setOrderTime(LocalTime.now());
-        orderService.save(order);
 
-        addressService.save(address);
 
         List<Order> personOrders = new ArrayList<>();
         personOrders.add(order);
         person.setOrders(personOrders);
-        person.setAddress(address);
         personService.save(person);
+
+        address.setPerson(person);
+        addressService.save(address);
+
+        order.setPerson(person);
+        orderService.save(order);
 
 
         Context context = new Context();
@@ -357,16 +360,18 @@ public class OrderController {
 
         order.setOrderDate(LocalDate.now());
         order.setOrderTime(LocalTime.now());
-        orderService.save(order);
 
-        addressService.save(address);
 
         List<Order> personOrders = new ArrayList<>();
         personOrders.add(order);
         person.setOrders(personOrders);
-        person.setAddress(address);
         personService.save(person);
 
+        address.setPerson(person);
+        addressService.save(address);
+
+        order.setPerson(personService.findPersonById((Long)session.getAttribute("personId")));
+        orderService.save(order);
 
         Context context = new Context();
         context.setVariable("productsInOrder", order.getProducts());
@@ -397,16 +402,18 @@ public class OrderController {
 
         order.setOrderDate(LocalDate.now());
         order.setOrderTime(LocalTime.now());
-        orderService.save(order);
 
-        addressService.save(address);
 
         List<Order> personOrders = new ArrayList<>();
         personOrders.add(order);
         person.setOrders(personOrders);
-        person.setAddress(address);
         personService.save(person);
 
+        address.setPerson(person);
+        addressService.save(address);
+
+        order.setPerson(personService.findPersonById((Long)session.getAttribute("personId")));
+        orderService.save(order);
 
         Context context = new Context();
         context.setVariable("productsInOrder", order.getProducts());

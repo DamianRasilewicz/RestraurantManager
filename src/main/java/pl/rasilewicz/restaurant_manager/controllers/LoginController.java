@@ -34,6 +34,7 @@ public class LoginController {
             return "redirect:/login?error";
         }
 
+        session.setAttribute("personId", loggedInPerson.getId());
         session.setAttribute("personName", loggedInPerson.getName());
         if (loggedInPerson.getRole().getName().equals("USER")){
             return "redirect:/user/home";

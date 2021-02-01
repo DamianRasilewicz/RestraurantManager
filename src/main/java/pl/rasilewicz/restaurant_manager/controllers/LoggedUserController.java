@@ -35,7 +35,7 @@ public class LoggedUserController {
     @GetMapping("/user/order/history")
     public String ordersHistoryUser (Model model, HttpSession session){
 
-        Person person = personService.findPersonByName((String)session.getAttribute("personName"));
+        Person person = personService.findPersonById((Long)session.getAttribute("personId"));
 
         List<Order> orderList = person.getOrders();
         model.addAttribute("orderList", orderList);

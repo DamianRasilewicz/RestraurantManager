@@ -8,4 +8,6 @@ public interface PersonService extends UserDetailsService {
     void save(Person user);
 
     Person findPersonByName(String personName);
+
+    Person findPersonById(Long id);
 }
