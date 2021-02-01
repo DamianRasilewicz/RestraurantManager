@@ -1,10 +1,9 @@
-CREATE SCHEMA IF NOT EXISTS `restaurant_manager` DEFAULT CHARACTER SET utf8 ;
-USE `restaurant_manager` ;
+CREATE SCHEMA IF NOT EXISTS restaurant_manager AUTHORIZATION postgres;
 
-INSERT INTO restaurant_manager.type_of_products (name) VALUE ('Pizza');
-INSERT INTO restaurant_manager.type_of_products (name) VALUE ('Danie Główne');
-INSERT INTO restaurant_manager.type_of_products (name) VALUE ('Zupy');
-INSERT INTO restaurant_manager.type_of_products (name) VALUE ('Napoje');
+INSERT INTO restaurant_manager.type_of_products (name) VALUES ('Pizza');
+INSERT INTO restaurant_manager.type_of_products (name) VALUES ('Danie Główne');
+INSERT INTO restaurant_manager.type_of_products (name) VALUES ('Zupy');
+INSERT INTO restaurant_manager.type_of_products (name) VALUES ('Napoje');
 
 INSERT INTO restaurant_manager.additions (description, name, price) VALUES ('Pizza', 'Podwójny ser', 2);
 INSERT INTO restaurant_manager.additions (description, name, price) VALUES ('Pizza', 'Salami', 2);
