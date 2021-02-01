@@ -1,5 +1,6 @@
 package pl.rasilewicz.restaurant_manager.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.rasilewicz.restaurant_manager.entities.Address;
 import pl.rasilewicz.restaurant_manager.repositories.AddressRepository;
