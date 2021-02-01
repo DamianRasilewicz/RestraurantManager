@@ -20,7 +20,7 @@ public class MainController {
         this.productService = productService;
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public String index(HttpSession session, Model model) {
 
         List<Product> listOfPizzas = productService.findProductsByType(1);
