@@ -10,9 +10,6 @@
         <div class="m-4 p-3 width-medium text-color-darker" th:style="'background:url(' + @{/img/image.png} + ')'">
         <div class="dashboard-content border-dashed p-3 m-4 view-height">
             <form method="POST" th:action="@{/order/submit}">
-<!--                <input type="hidden" th:field="*{order.products}" th:value="${order.getProducts()}">-->
-                <input type="hidden" th:field="*{order.orderCost}" th:value="${order.getOrderCost()}">
-                <input type="hidden" th:field="*{order.numberOfProducts}" th:value="${order.getNumberOfProducts()}">
                 <div class="mt-4 ml-4 mr-4">
                     <div th:if="${param.success}">
                         <div class="alert alert-success" style="text-align: center">Zamówienie złożone! Otrzymasz maila z Twoim zamówieniem.</div>

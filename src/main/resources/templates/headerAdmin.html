@@ -129,15 +129,11 @@
         }
 
         .view-height {
-            min-height: 100%;
+            min-height: 82.9vh;
         }
 
         .text-color-darker {
             color: var(--background-color);
-        }
-
-        .text-color-danger {
-            color: #ff6600;
         }
 
         .text-color-lighter {
@@ -507,17 +503,19 @@
 <body>
 <header class="page-header" th:fragment="header">
     <nav class="navbar navbar-expand-lg justify-content-between">
-        <a href="/" class="navbar-brand main-logo">
+        <a href="/admin/home" class="navbar-brand main-logo">
             Restauracja <span>Metapack</span>
         </a>
-        <ul class="nav nounderline text-uppercase">
-            <li class="nav-item ml-4">
-                <a class="nav-link color-header" href="/login">Logowanie</a>
-            </li>
-            <li class="nav-item ml-4">
-                <a class="nav-link color-header" href="/registration">Rejestracja</a>
-            </li>
-        </ul>
+        <div class="d-flex justify-content-around">
+            <h4 class="text-light mr-3" th:text="${session.personName}"></h4>
+            <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
+            <ul class="nav nounderline text-uppercase">
+                <li class="nav-item ml-4">
+                    <a class="nav-link color-header" href="/logout">Wyloguj</a>
+                </li>
+            </ul>
+        </div>
+
     </nav>
 </header>
 </body>

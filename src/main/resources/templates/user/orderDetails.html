@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:include="/headerLogged :: head"></head>
+<head th:include="headerUser :: head"></head>
 <body>
-<span th:replace="/headerLogged :: header"></span>
+<span th:replace="headerUser :: header"></span>
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
-        <span th:replace="/leftPanelUser :: leftPanel"></span>
+        <span th:replace="leftPanelUser :: leftPanel"></span>
 
         <div class="m-4 p-4 width-medium" th:style="'background:url(' + @{/img/image.png} + ')'">
             <div class="dashboard-header m-4">
@@ -110,6 +110,6 @@
     </div>
 </section>
 
-<span th:replace="/footer :: footer"></span>
+<span th:replace="footer :: footer"></span>
 </body>
 </html>

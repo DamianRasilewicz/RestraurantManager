@@ -302,18 +302,16 @@ public class OrderController {
     }
 
     @PostMapping("/order/submit")
-    public String orderSubmitted (Order order, @ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
+    public String orderSubmitted (@ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
                                   BindingResult resultAddress, HttpSession session) throws MessagingException {
 
         if (resultPerson.hasErrors() || resultAddress.hasErrors()) {
             return "mainPages/orderSubmitForm";
         }
 
-        Order orderInSession = (Order) session.getAttribute("order");
-        List<Product> productsInOrder = orderInSession.getProducts();
-        order.setProducts(productsInOrder);
+        Order order = (Order) session.getAttribute("order");
 
-        for (Product product : productsInOrder) {
+        for (Product product : order.getProducts()) {
             productService.save(product);
         }
 
@@ -344,18 +342,16 @@ public class OrderController {
     }
 
     @PostMapping("/user/order/submit")
-    public String orderSubmittedUser (Order order, @ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
+    public String orderSubmittedUser (@ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
                                   BindingResult resultAddress, HttpSession session) throws MessagingException {
 
         if (resultPerson.hasErrors() || resultAddress.hasErrors()) {
-            return "mainPages/orderSubmitForm";
+            return "user/orderSubmitForm";
         }
 
-        Order orderInSession = (Order) session.getAttribute("order");
-        List<Product> productsInOrder = orderInSession.getProducts();
-        order.setProducts(productsInOrder);
+        Order order = (Order) session.getAttribute("order");
 
-        for (Product product : productsInOrder) {
+        for (Product product : order.getProducts()) {
             productService.save(product);
         }
 
@@ -386,18 +382,16 @@ public class OrderController {
     }
 
     @PostMapping("/admin/order/submit")
-    public String orderSubmittedAdmin (Order order, @ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
+    public String orderSubmittedAdmin (@ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
                                   BindingResult resultAddress, HttpSession session) throws MessagingException {
 
         if (resultPerson.hasErrors() || resultAddress.hasErrors()) {
-            return "mainPages/orderSubmitForm";
+            return "admin/orderSubmitForm";
         }
 
-        Order orderInSession = (Order) session.getAttribute("order");
-        List<Product> productsInOrder = orderInSession.getProducts();
-        order.setProducts(productsInOrder);
+        Order order = (Order) session.getAttribute("order");
 
-        for (Product product : productsInOrder) {
+        for (Product product : order.getProducts()) {
             productService.save(product);
         }
 

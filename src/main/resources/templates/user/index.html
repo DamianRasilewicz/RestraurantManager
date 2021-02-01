@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:include="/headerLogged :: head"></head>
+<head th:include="headerUser :: head"></head>
 <body>
-<span th:replace="/headerLogged :: header"></span>
+<span th:replace="headerUser :: header"></span>
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
-        <span th:replace="/leftPanelUser :: leftPanel"></span>
-        <span th:replace="/dashboardHeaderUser :: dashboardHeader"></span>
+        <span th:replace="leftPanelUser :: leftPanel"></span>
+        <span th:replace="dashboardHeaderUser :: dashboardHeader"></span>
             <div class="m-4 p-4 border-dashed">
                 <h2 class="dashboard-content-title">
                     <span>Menu</span>
@@ -35,7 +35,7 @@
                         </td>
                         <td class="col-1 center" th:text="${pizza.getPrice()} + ' zł'"></td>
                         <td class="col-2 center">
-                            <a th:href="@{/order/pizza(id=${pizza.getId()})}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zamów</a>
+                            <a th:href="@{/user/order/pizza(id=${pizza.getId()})}" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zamów</a>
                         </td>
                     </tr>
                     </tbody>
@@ -105,6 +105,6 @@
     </div>
 </section>
 
-<span th:replace="/footer :: footer"></span>
+<span th:replace="footer :: footer"></span>
 </body>
 </html>
