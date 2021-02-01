@@ -15,14 +15,12 @@ import java.util.List;
 public class MainController {
 
     private final ProductServiceImpl productService;
-    private final TypeOfProductsServiceImpl typeOfProductsService;
 
-    public MainController(ProductServiceImpl productService, TypeOfProductsServiceImpl typeOfProductsService) {
+    public MainController(ProductServiceImpl productService) {
         this.productService = productService;
-        this.typeOfProductsService = typeOfProductsService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String index(HttpSession session, Model model) {
 
         List<Product> listOfPizzas = productService.findProductsByType(1);
