@@ -44,7 +44,7 @@ public class OrderController {
     }
 
     @GetMapping("/order/basket")
-    public String ordersBasket (HttpSession session, Model model){
+    public String ordersBasket(HttpSession session, Model model) {
 
         if (session.getAttribute("order") == null) {
             Order order = new Order();
@@ -63,7 +63,7 @@ public class OrderController {
     }
 
     @GetMapping("/user/order/basket")
-    public String ordersBasketUser (HttpSession session, Model model){
+    public String ordersBasketUser(HttpSession session, Model model) {
 
         if (session.getAttribute("order") == null) {
             Order order = new Order();
@@ -82,7 +82,7 @@ public class OrderController {
     }
 
     @GetMapping("/admin/order/basket")
-    public String ordersBasketAdmin (HttpSession session, Model model){
+    public String ordersBasketAdmin(HttpSession session, Model model) {
 
         if (session.getAttribute("order") == null) {
             Order order = new Order();
@@ -102,7 +102,7 @@ public class OrderController {
 
 
     @GetMapping("/order/delete")
-    public String deleteOrder (HttpSession session){
+    public String deleteOrder(HttpSession session) {
 
         session.removeAttribute("order");
         Order order = new Order();
@@ -114,7 +114,7 @@ public class OrderController {
     }
 
     @GetMapping("/user/order/delete")
-    public String deleteOrderUser (HttpSession session){
+    public String deleteOrderUser(HttpSession session) {
 
         session.removeAttribute("order");
         Order order = new Order();
@@ -126,7 +126,7 @@ public class OrderController {
     }
 
     @GetMapping("/admin/order/delete")
-    public String deleteOrderAdmin (HttpSession session){
+    public String deleteOrderAdmin(HttpSession session) {
 
         session.removeAttribute("order");
         Order order = new Order();
@@ -138,17 +138,17 @@ public class OrderController {
     }
 
     @GetMapping("/order/product/delete")
-    public String orderProductDelete (@RequestParam int index, HttpSession session){
+    public String orderProductDelete(@RequestParam int index, HttpSession session) {
 
         Order order = (Order) session.getAttribute("order");
 
-        List <Product> productsInOrder = order.getProducts();
+        List<Product> productsInOrder = order.getProducts();
         Product deletingProduct = productsInOrder.get(index);
 
         double costOfRemovingProduct = 0.00;
-        if (deletingProduct.getAdditions() == null){
+        if (deletingProduct.getAdditions() == null) {
             costOfRemovingProduct = costOfRemovingProduct + deletingProduct.getPrice();
-        }else {
+        } else {
 
             for (Addition addition : deletingProduct.getAdditions()) {
                 costOfRemovingProduct = costOfRemovingProduct + addition.getPrice();
@@ -174,17 +174,17 @@ public class OrderController {
     }
 
     @GetMapping("/user/order/product/delete")
-    public String orderProductDeleteUser (@RequestParam int index, HttpSession session){
+    public String orderProductDeleteUser(@RequestParam int index, HttpSession session) {
 
         Order order = (Order) session.getAttribute("order");
 
-        List <Product> productsInOrder = order.getProducts();
+        List<Product> productsInOrder = order.getProducts();
         Product deletingProduct = productsInOrder.get(index);
 
         double costOfRemovingProduct = 0.00;
-        if (deletingProduct.getAdditions() == null){
+        if (deletingProduct.getAdditions() == null) {
             costOfRemovingProduct = costOfRemovingProduct + deletingProduct.getPrice();
-        }else {
+        } else {
 
             for (Addition addition : deletingProduct.getAdditions()) {
                 costOfRemovingProduct = costOfRemovingProduct + addition.getPrice();
@@ -210,17 +210,17 @@ public class OrderController {
     }
 
     @GetMapping("/admin/order/product/delete")
-    public String orderProductDeleteAdmin (@RequestParam int index, HttpSession session){
+    public String orderProductDeleteAdmin(@RequestParam int index, HttpSession session) {
 
         Order order = (Order) session.getAttribute("order");
 
-        List <Product> productsInOrder = order.getProducts();
+        List<Product> productsInOrder = order.getProducts();
         Product deletingProduct = productsInOrder.get(index);
 
         double costOfRemovingProduct = 0.00;
-        if (deletingProduct.getAdditions() == null){
+        if (deletingProduct.getAdditions() == null) {
             costOfRemovingProduct = costOfRemovingProduct + deletingProduct.getPrice();
-        }else {
+        } else {
 
             for (Addition addition : deletingProduct.getAdditions()) {
                 costOfRemovingProduct = costOfRemovingProduct + addition.getPrice();
@@ -247,9 +247,9 @@ public class OrderController {
 
 
     @GetMapping("/order/submit")
-    public String orderSubmitForm (HttpSession session, Model model){
+    public String orderSubmitForm(Model model) {
 
-        Order order = (Order) session.getAttribute("order");
+        Order order = new Order();
         model.addAttribute("order", order);
 
         Person person = new Person();
@@ -262,18 +262,18 @@ public class OrderController {
     }
 
     @GetMapping("/user/order/submit")
-    public String orderSubmitFormUser (HttpSession session, Model model){
+    public String orderSubmitFormUser(HttpSession session, Model model) {
 
-        Order order = (Order) session.getAttribute("order");
+        Order order = new Order();
         model.addAttribute("order", order);
 
         Person person = personService.findPersonById((Long) session.getAttribute("personId"));
         model.addAttribute("person", person);
 
-        if(person.getAddress() == null) {
+        if (person.getAddress() == null) {
             Address address = new Address();
             model.addAttribute("address", address);
-        }else {
+        } else {
             Address address = addressService.findAddressByPersonId(person.getId());
             model.addAttribute("address", address);
         }
@@ -282,7 +282,7 @@ public class OrderController {
     }
 
     @GetMapping("/admin/order/submit")
-    public String orderSubmitFormAdmin (HttpSession session, Model model){
+    public String orderSubmitFormAdmin(HttpSession session, Model model) {
 
         Order order = (Order) session.getAttribute("order");
         model.addAttribute("order", order);
@@ -290,10 +290,10 @@ public class OrderController {
         Person person = personService.findPersonById((Long) session.getAttribute("personId"));
         model.addAttribute("person", person);
 
-        if(person.getAddress() == null) {
+        if (person.getAddress() == null) {
             Address address = new Address();
             model.addAttribute("address", address);
-        }else {
+        } else {
             Address address = addressService.findAddressByPersonId(person.getId());
             model.addAttribute("address", address);
         }
@@ -302,38 +302,35 @@ public class OrderController {
     }
 
     @PostMapping("/order/submit")
-    public String orderSubmitted (@ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
-                                  BindingResult resultAddress, HttpSession session) throws MessagingException {
+    public String orderSubmitted(@ModelAttribute("order") @Valid Order order, BindingResult resultOrder, @ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
+                                 BindingResult resultAddress, HttpSession session) throws MessagingException {
 
-        if (resultPerson.hasErrors() || resultAddress.hasErrors()) {
+        if (resultPerson.hasErrors() || resultAddress.hasErrors() || resultOrder.hasErrors()) {
             return "mainPages/orderSubmitForm";
         }
 
-        Order order = (Order) session.getAttribute("order");
+        Order orderToSave = (Order) session.getAttribute("order");
+        orderToSave.setComment(order.getComment());
 
-        for (Product product : order.getProducts()) {
-            productService.save(product);
-        }
-
-        order.setOrderDate(LocalDate.now());
-        order.setOrderTime(LocalTime.now());
+        orderToSave.setOrderDate(LocalDate.now());
+        orderToSave.setOrderTime(LocalTime.now());
 
 
         List<Order> personOrders = new ArrayList<>();
-        personOrders.add(order);
+        personOrders.add(orderToSave);
         person.setOrders(personOrders);
         personService.save(person);
 
         address.setPerson(person);
         addressService.save(address);
 
-        order.setPerson(person);
-        orderService.save(order);
+        orderToSave.setPerson(person);
+        orderService.save(orderToSave);
 
 
         Context context = new Context();
-        context.setVariable("productsInOrder", order.getProducts());
-        context.setVariable("order", order);
+        context.setVariable("productsInOrder", orderToSave.getProducts());
+        context.setVariable("order", orderToSave);
         context.setVariable("person", person);
         context.setVariable("address", address);
         String body = templateEngine.process("mailTemplate", context);
@@ -345,37 +342,34 @@ public class OrderController {
     }
 
     @PostMapping("/user/order/submit")
-    public String orderSubmittedUser (@ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
-                                  BindingResult resultAddress, HttpSession session) throws MessagingException {
+    public String orderSubmittedUser(@ModelAttribute("order") @Valid Order order, BindingResult resultOrder, @ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
+                                     BindingResult resultAddress, HttpSession session) throws MessagingException {
 
-        if (resultPerson.hasErrors() || resultAddress.hasErrors()) {
+        if (resultPerson.hasErrors() || resultAddress.hasErrors() || resultOrder.hasErrors()) {
             return "user/orderSubmitForm";
         }
 
-        Order order = (Order) session.getAttribute("order");
+        Order orderToSave = (Order) session.getAttribute("order");
+        orderToSave.setComment(order.getComment());
 
-        for (Product product : order.getProducts()) {
-            productService.save(product);
-        }
-
-        order.setOrderDate(LocalDate.now());
-        order.setOrderTime(LocalTime.now());
+        orderToSave.setOrderDate(LocalDate.now());
+        orderToSave.setOrderTime(LocalTime.now());
 
 
         List<Order> personOrders = new ArrayList<>();
-        personOrders.add(order);
+        personOrders.add(orderToSave);
         person.setOrders(personOrders);
         personService.save(person);
 
         address.setPerson(person);
         addressService.save(address);
 
-        order.setPerson(personService.findPersonById((Long)session.getAttribute("personId")));
-        orderService.save(order);
+        orderToSave.setPerson(personService.findPersonById((Long) session.getAttribute("personId")));
+        orderService.save(orderToSave);
 
         Context context = new Context();
-        context.setVariable("productsInOrder", order.getProducts());
-        context.setVariable("order", order);
+        context.setVariable("productsInOrder", orderToSave.getProducts());
+        context.setVariable("order", orderToSave);
         context.setVariable("person", person);
         context.setVariable("address", address);
         String body = templateEngine.process("mailTemplate", context);
@@ -387,45 +381,42 @@ public class OrderController {
     }
 
     @PostMapping("/admin/order/submit")
-    public String orderSubmittedAdmin (@ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
-                                  BindingResult resultAddress, HttpSession session) throws MessagingException {
+    public String orderSubmittedAdmin(@ModelAttribute("order") @Valid Order order, BindingResult resultOrder, @ModelAttribute("person") @Valid Person person, BindingResult resultPerson, @ModelAttribute("address") @Valid Address address,
+                                      BindingResult resultAddress, HttpSession session) throws MessagingException {
 
-        if (resultPerson.hasErrors() || resultAddress.hasErrors()) {
-            return "admin/orderSubmitForm";
+            if (resultPerson.hasErrors() || resultAddress.hasErrors() || resultOrder.hasErrors()) {
+                return "admin/orderSubmitForm";
+            }
+
+            Order orderToSave = (Order) session.getAttribute("order");
+            orderToSave.setComment(order.getComment());
+
+            orderToSave.setOrderDate(LocalDate.now());
+            orderToSave.setOrderTime(LocalTime.now());
+
+
+            List<Order> personOrders = new ArrayList<>();
+            personOrders.add(orderToSave);
+            person.setOrders(personOrders);
+            personService.save(person);
+
+            address.setPerson(person);
+            addressService.save(address);
+
+            orderToSave.setPerson(personService.findPersonById((Long) session.getAttribute("personId")));
+            orderService.save(orderToSave);
+
+            Context context = new Context();
+            context.setVariable("productsInOrder", orderToSave.getProducts());
+            context.setVariable("order", orderToSave);
+            context.setVariable("person", person);
+            context.setVariable("address", address);
+            String body = templateEngine.process("mailTemplate", context);
+            mailService.sendEmail(person.getEmail(), "Twoje zamówienie w serwisie Restauracja Metapack", body);
+
+            session.removeAttribute("order");
+
+            return "redirect:/admin/order/submit?success";
         }
 
-        Order order = (Order) session.getAttribute("order");
-
-        for (Product product : order.getProducts()) {
-            productService.save(product);
-        }
-
-        order.setOrderDate(LocalDate.now());
-        order.setOrderTime(LocalTime.now());
-
-
-        List<Order> personOrders = new ArrayList<>();
-        personOrders.add(order);
-        person.setOrders(personOrders);
-        personService.save(person);
-
-        address.setPerson(person);
-        addressService.save(address);
-
-        order.setPerson(personService.findPersonById((Long)session.getAttribute("personId")));
-        orderService.save(order);
-
-        Context context = new Context();
-        context.setVariable("productsInOrder", order.getProducts());
-        context.setVariable("order", order);
-        context.setVariable("person", person);
-        context.setVariable("address", address);
-        String body = templateEngine.process("mailTemplate", context);
-        mailService.sendEmail(person.getEmail(), "Twoje zamówienie w serwisie Restauracja Metapack", body);
-
-        session.removeAttribute("order");
-
-        return "redirect:/admin/order/submit?success";
     }
-
-}

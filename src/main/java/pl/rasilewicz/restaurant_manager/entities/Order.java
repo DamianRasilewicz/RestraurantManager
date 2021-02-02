@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class Order {
     @ManyToOne
     private Person person;
 
+    @Size(max = 255, message = "Zbyt długi komentarz")
     private String comment;
 
     @ManyToMany

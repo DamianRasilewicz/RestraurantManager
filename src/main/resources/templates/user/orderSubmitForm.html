@@ -29,24 +29,30 @@
                             <th scope="row" class="col-3" style="text-align: end">Imię</th>
                             <td class="col-6">
                                 <input th:field="*{person.firstName}" th:value="${person.getFirstName()}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('person.firstName')}" th:errors="*{person.firstName}"></div>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Nazwisko</th>
                             <td class="col-6">
                                 <input th:field="*{person.lastName}" th:value="${person.getLastName()}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('person.lastName')}" th:errors="*{person.lastName}"></div>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Numer telefonu</th>
                             <td class="col-6">
                                 <input th:field="*{person.phoneNumber}" th:value="${person.getPhoneNumber()}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('person.phoneNumber')}" th:errors="*{person.phoneNumber}"></div>
+
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Email</th>
                             <td class="col-6">
                                 <input th:field="*{person.email}" th:value="${person.getEmail()}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('person.email')}" th:errors="*{person.email}"></div>
+
                             </td>
                         </tr>
 
@@ -61,6 +67,8 @@
                                   <span th:case="'0'"></span>
                                      <span th:case="*">
                                 <input th:field="*{address.street}" th:value="${person.getAddress().getStreet()}" class="w-100 p-1">
+                                 <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}"></div>
+
                                      </span>
                                 </span>
                             </td>
@@ -69,6 +77,7 @@
                             <th scope="row" class="col-3" style="text-align: end">Number budynku</th>
                             <td class="col-1">
                                 <span th:switch="${person.getAddress().getBuildingNumber()}">
+                                    <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('address.buildingNumber')}" th:errors="*{address.buildingNumber}"></div>
                                   <span th:case="'0'"></span>
                                      <span th:case="*">
                                 <input th:field="*{address.buildingNumber}" th:value="${person.getAddress().getBuildingNumber()}" class="w-100 p-1">
@@ -83,6 +92,7 @@
                                   <span th:case="'0'"></span>
                                      <span th:case="*">
                                 <input th:field="*{address.postcode}" th:value="${person.getAddress().getPostcode()}" class="w-100 p-1">
+                                         <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('address.postcode')}" th:errors="*{address.postcode}"></div>
                                      </span>
                                 </span>
                             </td>
@@ -94,6 +104,7 @@
                                   <span th:case="'0'"></span>
                                      <span th:case="*">
                                 <input th:field="*{address.city}" th:value="${person.getAddress().getCity()}" class="w-100 p-1">
+                                         <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"></div>
                                      </span>
                                 </span>
                             </td>
@@ -101,7 +112,8 @@
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Komentarz</th>
                             <td class="col-6">
-                                <textarea th:field="*{order.comment}" th:value="''" class="w-100 p-1" rows="5"></textarea>
+                                <input th:field="*{order.comment}" th:value="''" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('order.comment')}" th:errors="*{order.comment}"></div>
                             </td>
                         </tr>
 

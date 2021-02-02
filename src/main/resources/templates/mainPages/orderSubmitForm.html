@@ -8,23 +8,20 @@
     <div class="row dashboard-nowrap">
         <span th:replace="leftPanel :: leftPanel"></span>
         <div class="m-4 p-3 width-medium text-color-darker" th:style="'background:url(' + @{/img/image.png} + ')'">
-        <div class="dashboard-content border-dashed p-3 m-4 view-height">
+        <div class="dashboard-content border-dashed p-3 m-4">
             <form method="POST" th:action="@{/order/submit}">
                 <div class="mt-4 ml-4 mr-4">
                     <div th:if="${param.success}">
                         <div class="alert alert-success" style="text-align: center">Zamówienie złożone! Otrzymasz maila z Twoim zamówieniem.</div>
                     </div>
-                    <br>
                     <h2 class="dashboard-content-title">
                         <span>Złóż zamówienie</span>
                     </h2>
                     <table class="table borderless">
                         <tbody>
-
                         <tr class="d-flex">
                             <td class="col-12 border-bottom border-3"><h3 class="text-uppercase">Dane personalne</h3></td>
                         </tr>
-
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Imię</th>
                             <td class="col-6">
@@ -67,14 +64,14 @@
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Number budynku</th>
-                            <td class="col-1">
+                            <td class="col-2">
                                 <input th:field="*{address.buildingNumber}" class="w-100 p-1">
                                 <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('address.buildingNumber')}" th:errors="*{address.buildingNumber}"></div>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Kod pocztowy</th>
-                            <td class="col-1">
+                            <td class="col-2">
                                 <input th:field="*{address.postcode}" class="w-100 p-1">
                                 <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('address.postcode')}" th:errors="*{address.postcode}"></div>
                             </td>
@@ -89,10 +86,10 @@
                         <tr class="d-flex">
                             <th scope="row" class="col-3" style="text-align: end">Komentarz</th>
                             <td class="col-6">
-                                <textarea th:field="*{order.comment}" th:value="''" class="w-100 p-1" rows="5"></textarea>
+                                <input type="text" th:field="*{order.comment}" th:value="''" class="w-100 p-2">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('order.comment')}" th:errors="*{order.comment}"></div>
                             </td>
                         </tr>
-
                         </tbody>
                     </table>
                     </div>
