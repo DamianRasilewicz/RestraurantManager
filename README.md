@@ -17,8 +17,8 @@ Imagine that you have a restaurant. Food is very tasty, you have a lot of custom
 http://restaurantmetapackmanager.herokuapp.com/
 
 If you want to try logging:
-- user name: admin    password: admin    role: admin
-- user name  user     password: user     role: user
+- user name: admin;    password: admin;    role: admin
+- user name  user;     password: user;     role: user
 
 ## Technologies
 -   Java
