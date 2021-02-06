@@ -13,6 +13,12 @@ Imagine that you have a restaurant. Food is very tasty, you have a lot of custom
 ## Demo View
 ![](https://github.com/DamianRasilewicz/RestraurantManager/blob/main/src/main/demoView/Demo1.png)
 
+## Try Application
+http://restaurantmetapackmanager.herokuapp.com/
+
+If you want to try logging:
+user name: admin    password: admin    role: admin
+user name  user     password: user     role: user
 
 ## Technologies
 -   Java
@@ -28,6 +34,3 @@ Imagine that you have a restaurant. Food is very tasty, you have a lot of custom
 -   Maven
 -   JavaScript
 -   Bootstrap
-
-## Try Application
-http://restaurantmetapackmanager.herokuapp.com/
