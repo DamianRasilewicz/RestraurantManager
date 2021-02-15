@@ -17,7 +17,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product findProductById(Long id);
 
-    @Query(value = "SELECT * FROM restaurant_manager.products" , nativeQuery = true)
+    @Query(value = "SELECT * FROM restaurant_manager.products ORDER BY type_of_product_id;" , nativeQuery = true)
     List<Product> findAllProducts();
 
 }

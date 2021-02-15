@@ -65,13 +65,13 @@ public class LoggedUserController {
         return "user/orderDetails";
     }
 
-    @GetMapping("/user/products")
-    public String allProducts (@RequestParam Long id, Model model){
+    @GetMapping("/admin/products")
+    public String allProducts (Model model){
 
-//        List<Product> allProducts =
-        model.addAttribute("allProducts", allProducts)
+        List<Product> allProducts = productService.findAllProducts();
+        model.addAttribute("allProducts", allProducts);
 
-        return "user/orderDetails";
+        return "admin/allProducts";
     }
 
 }
