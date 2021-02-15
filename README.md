@@ -23,9 +23,9 @@ If you want to try logging:
 ## Technologies
 -   Java
 -   Spring
-    SpringBoot
+-   SpringBoot
 -   Hibernate
-    JavaMailSender
+-   JavaMailSender
 -   Thymeleaf
 -   OpenCSV
 -   Lombok
