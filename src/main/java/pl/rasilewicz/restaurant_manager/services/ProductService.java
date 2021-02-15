@@ -10,4 +10,6 @@ public interface ProductService {
     void save(Product product);
 
     Product findProductById(Long id);
+
+    List<Product> findAllProducts();
 }
