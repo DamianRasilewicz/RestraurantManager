@@ -13,6 +13,6 @@ import java.util.List;
 @EntityScan(basePackages = "pl.rasilewicz.restaurant_manager.entities")
 public interface TypeOfProductRepository extends JpaRepository<TypeOfProduct, Integer> {
 
-    @Query(value = "SELECT * FROM restaurant_manager.type_of_products", nativeQuery = true)
+    @Query(value = "SELECT * FROM restaurant_manager.type_of_products ORDER BY id", nativeQuery = true)
     List<TypeOfProduct> findAllTypesOfProduct();
 }

@@ -74,4 +74,13 @@ public class LoggedUserController {
         return "admin/allProducts";
     }
 
+    @GetMapping("/admin/products/edit")
+    public String ProductEditingForm (@RequestParam Long id, Model model){
+
+        Product editingProduct = productService.findProductById(id);
+        model.addAttribute("editingProduct", editingProduct);
+
+        return "admin/productEditingForm";
+    }
+
 }
