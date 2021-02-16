@@ -100,4 +100,12 @@ public class LoggedUserController {
 
         return "redirect:/admin/products";
     }
+
+    @GetMapping("/admin/products/delete")
+    public String ProductDeleting (@RequestParam Long id){
+
+        productService.deleteProductById(id);
+
+        return "redirect:/admin/products";
+    }
 }
