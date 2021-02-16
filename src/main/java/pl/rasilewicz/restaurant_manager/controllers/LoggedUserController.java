@@ -138,4 +138,14 @@ public class LoggedUserController {
 
         return "redirect:/admin/products";
     }
+
+    @GetMapping("/admin/typeOfProducts")
+    public String allTypeOfProducts (Model model){
+
+        List<TypeOfProduct> allTypesOfProducts = typeOfProductsService.findAllTypesOfProduct();
+        model.addAttribute("allTypesOfProducts", allTypesOfProducts);
+
+        return "admin/allTypesOfProducts";
+    }
+
 }
