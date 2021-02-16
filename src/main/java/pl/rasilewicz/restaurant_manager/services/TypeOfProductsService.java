@@ -8,4 +8,6 @@ public interface TypeOfProductsService {
     List<TypeOfProduct> findAllTypesOfProduct();
 
     TypeOfProduct findTypeOfProductById(Integer id);
+
+    void update(String name, Integer id);
 }

@@ -148,4 +148,21 @@ public class LoggedUserController {
         return "admin/allTypesOfProducts";
     }
 
+    @GetMapping("/admin/typeOfProducts/edit")
+    public String typeOfProductEditingForm (@RequestParam Integer id, Model model){
+
+        TypeOfProduct editingTypeOfProduct = typeOfProductsService.findTypeOfProductById(id);
+        model.addAttribute("editingTypeOfProduct", editingTypeOfProduct);
+
+        return "admin/typeOfProductEditingForm";
+    }
+
+    @PostMapping("/admin/typeOfProducts/edit")
+    public String SubmitTypeOfProductEditingForm (@ModelAttribute TypeOfProduct editingTypeOfProduct){
+
+        typeOfProductsService.update(editingTypeOfProduct.getName(), editingTypeOfProduct.getId());
+
+        return "redirect:/admin/typeOfProducts";
+    }
+
 }

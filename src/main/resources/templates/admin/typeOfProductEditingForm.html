@@ -9,7 +9,7 @@
         <span th:replace="leftPanelAdmin :: leftPanel"></span>
         <div class="m-4 p-3 width-medium text-color-darker" th:style="'background:url(' + @{/img/image.png} + ')'">
         <div class="dashboard-content border-dashed p-3 m-4 view-height">
-            <form method="POST" th:action="@{/admin/products/edit}">
+            <form method="POST" th:action="@{/admin/typeOfProducts/edit}">
                 <div class="mt-4 ml-4 mr-4">
                     <br>
                     <h2 class="dashboard-content-title">
@@ -17,30 +17,15 @@
                     </h2>
                     <table class="table borderless">
                         <tbody>
-                        <input type="hidden" th:value="${editingProduct.getId()}" th:field="*{editingProduct.id}" >
+                        <input type="hidden" th:value="${editingTypeOfProduct.getId()}" th:field="*{editingTypeOfProduct.id}" >
                         <tr class="d-flex">
                             <td class="col-12 border-bottom border-3"><h3 class="text-uppercase"></h3></td>
                         </tr>
 
                         <tr class="d-flex">
-                            <th scope="row" class="col-5" style="text-align: end">Nazwa produktu</th>
+                            <th scope="row" class="col-5" style="text-align: end">Nazwa kategorii obiektu</th>
                             <td class="col-2">
-                                <input th:field="*{editingProduct.name}" th:value="${editingProduct.getName()}" class="w-100 p-1">
-                            </td>
-                        </tr>
-                        <tr class="d-flex">
-                            <th scope="row" class="col-5" style="text-align: end">Typ produktu</th>
-                            <td class="col-2">
-<!--                                <input th:field="*{editingProduct.type}" th:value="${editingProduct.getType().getName()}" class="w-100 p-1">-->
-                                <select class="form-control" name="typeOfProductId">
-                                    <option th:each="type: ${allTypeOfProducts}" th:value="${type.getId()}" th:text="${type.getName()}" th:selected="${type.getName() == editingProduct.getType().getName()}"></option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr class="d-flex">
-                            <th scope="row" class="col-5" style="text-align: end">Cena</th>
-                            <td class="col-1">
-                                <input th:field="*{editingProduct.price}" th:value="${editingProduct.getPrice()}" class="w-100 p-1">
+                                <input th:field="*{editingTypeOfProduct.name}" th:value="${editingTypeOfProduct.getName()}" class="w-100 p-1">
                             </td>
                         </tr>
                         </tbody>

@@ -23,4 +23,9 @@ public class TypeOfProductsServiceImpl implements TypeOfProductsService{
     public TypeOfProduct findTypeOfProductById(Integer id) {
         return typeOfProductRepository.findTypeOfProductById(id);
     }
+
+    @Override
+    public void update(String name, Integer id) {
+        typeOfProductRepository.update(name, id);
+    }
 }
