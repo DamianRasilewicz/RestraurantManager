@@ -18,4 +18,9 @@ public class TypeOfProductsServiceImpl implements TypeOfProductsService{
     public List<TypeOfProduct> findAllTypesOfProduct() {
         return typeOfProductRepository.findAllTypesOfProduct();
     }
+
+    @Override
+    public TypeOfProduct findTypeOfProductById(Integer id) {
+        return typeOfProductRepository.findTypeOfProductById(id);
+    }
 }

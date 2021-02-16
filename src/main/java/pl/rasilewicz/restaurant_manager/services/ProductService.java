@@ -12,4 +12,6 @@ public interface ProductService {
     Product findProductById(Long id);
 
     List<Product> findAllProducts();
+
+    void update(String name, Double price, Integer typeOfProductId, Long id);
 }

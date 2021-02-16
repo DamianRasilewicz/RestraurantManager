@@ -3,13 +3,17 @@ package pl.rasilewicz.restaurant_manager.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.rasilewicz.restaurant_manager.entities.Order;
 import pl.rasilewicz.restaurant_manager.entities.Person;
 import pl.rasilewicz.restaurant_manager.entities.Product;
+import pl.rasilewicz.restaurant_manager.entities.TypeOfProduct;
 import pl.rasilewicz.restaurant_manager.services.OrderServiceImpl;
 import pl.rasilewicz.restaurant_manager.services.PersonServiceImpl;
 import pl.rasilewicz.restaurant_manager.services.ProductServiceImpl;
+import pl.rasilewicz.restaurant_manager.services.TypeOfProductsServiceImpl;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -20,11 +24,14 @@ public class LoggedUserController {
     private final OrderServiceImpl orderService;
     private final PersonServiceImpl personService;
     private final ProductServiceImpl productService;
+    private final TypeOfProductsServiceImpl typeOfProductsService;
 
-    public LoggedUserController(OrderServiceImpl orderService, PersonServiceImpl personService, ProductServiceImpl productService) {
+    public LoggedUserController(OrderServiceImpl orderService, PersonServiceImpl personService, ProductServiceImpl productService,
+                                TypeOfProductsServiceImpl typeOfProductsService) {
         this.orderService = orderService;
         this.personService = personService;
         this.productService = productService;
+        this.typeOfProductsService = typeOfProductsService;
     }
 
     @GetMapping("/admin/order/history")
@@ -80,7 +87,17 @@ public class LoggedUserController {
         Product editingProduct = productService.findProductById(id);
         model.addAttribute("editingProduct", editingProduct);
 
+        List<TypeOfProduct> typeOfProductList = typeOfProductsService.findAllTypesOfProduct();
+        model.addAttribute("allTypeOfProducts", typeOfProductList);
+
         return "admin/productEditingForm";
     }
 
+    @PostMapping("/admin/products/edit")
+    public String SubmitProductEditingForm (@RequestParam Integer typeOfProductId, @ModelAttribute Product editingProduct){
+
+        productService.update(editingProduct.getName(), editingProduct.getPrice(), typeOfProductId, editingProduct.getId());
+
+        return "redirect:/admin/products";
+    }
 }

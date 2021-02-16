@@ -6,4 +6,6 @@ import java.util.List;
 public interface TypeOfProductsService {
 
     List<TypeOfProduct> findAllTypesOfProduct();
+
+    TypeOfProduct findTypeOfProductById(Integer id);
 }

@@ -4,9 +4,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import pl.rasilewicz.restaurant_manager.entities.Product;
 import pl.rasilewicz.restaurant_manager.entities.TypeOfProduct;
-
 import java.util.List;
 
 @Repository
@@ -15,4 +13,6 @@ public interface TypeOfProductRepository extends JpaRepository<TypeOfProduct, In
 
     @Query(value = "SELECT * FROM restaurant_manager.type_of_products ORDER BY id", nativeQuery = true)
     List<TypeOfProduct> findAllTypesOfProduct();
+
+    TypeOfProduct findTypeOfProductById(Integer id);
 }

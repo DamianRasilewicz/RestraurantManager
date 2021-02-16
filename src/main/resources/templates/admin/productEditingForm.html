@@ -20,7 +20,7 @@
                     </h2>
                     <table class="table borderless">
                         <tbody>
-
+                        <input type="hidden" th:value="${editingProduct.getId()}" th:field="*{editingProduct.id}" >
                         <tr class="d-flex">
                             <td class="col-12 border-bottom border-3"><h3 class="text-uppercase"></h3></td>
                         </tr>
@@ -34,7 +34,10 @@
                         <tr class="d-flex">
                             <th scope="row" class="col-5" style="text-align: end">Typ produktu</th>
                             <td class="col-2">
-                                <input th:field="*{editingProduct.type}" th:value="${editingProduct.getType().getName()}" class="w-100 p-1">
+<!--                                <input th:field="*{editingProduct.type}" th:value="${editingProduct.getType().getName()}" class="w-100 p-1">-->
+                                <select class="form-control" name="typeOfProductId">
+                                    <option th:each="type: ${allTypeOfProducts}" th:value="${type.getId()}" th:text="${type.getName()}" th:selected="${type.getName() == editingProduct.getType().getName()}"></option>
+                                </select>
                             </td>
                         </tr>
                         <tr class="d-flex">
