@@ -7,7 +7,7 @@
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
         <span th:replace="leftPanelAdmin :: leftPanel"></span>
-        <div class="m-4 p-3 width-medium text-color-darker" th:style="'background:url(' + @{/img/image.png} + ')'">
+        <div class="m-4 p-3 width-medium" th:style="'background:url(' + @{/img/image.png} + ')'">
         <div class="dashboard-content border-dashed p-3 m-4 view-height">
             <form method="POST" th:action="@{/admin/products/add}">
                 <div class="mt-4 ml-4 mr-4">
@@ -28,12 +28,12 @@
                             <th scope="row" class="col-5" style="text-align: end">Nazwa produktu</th>
                             <td class="col-2">
                                 <input th:field="*{newProduct.name}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('newProduct.name')}" th:errors="*{newProduct.name}"></div>
                             </td>
                         </tr>
                         <tr class="d-flex">
                             <th scope="row" class="col-5" style="text-align: end">Typ produktu</th>
                             <td class="col-2">
-<!--                                <input th:field="*{editingProduct.type}" th:value="${editingProduct.getType().getName()}" class="w-100 p-1">-->
                                 <select class="form-control" name="typeOfProductId">
                                     <option th:each="type: ${allTypeOfProducts}" th:value="${type.getId()}" th:text="${type.getName()}"></option>
                                 </select>
@@ -43,6 +43,7 @@
                             <th scope="row" class="col-5" style="text-align: end">Cena</th>
                             <td class="col-1">
                                 <input th:field="*{newProduct.price}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('newProduct.price')}" th:errors="*{newProduct.price}"></div>
                             </td>
                         </tr>
                         </tbody>

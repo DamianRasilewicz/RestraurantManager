@@ -7,6 +7,9 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +23,10 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Size(min = 3, message = "Nazwa jest za krótka (Minimum 3 litery)")
     private String name;
 
+    @DecimalMin(value = "0.01", message = "Niepoprawna wartość")
     private double price;
 
     @ManyToOne()
