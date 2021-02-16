@@ -108,4 +108,25 @@ public class LoggedUserController {
 
         return "redirect:/admin/products";
     }
+
+    @GetMapping("/admin/products/add")
+    public String ProductAddingForm (Model model){
+
+        Product newProduct = new Product();
+        model.addAttribute("newProduct", newProduct);
+
+        List<TypeOfProduct> typeOfProductList = typeOfProductsService.findAllTypesOfProduct();
+        model.addAttribute("allTypeOfProducts", typeOfProductList);
+
+        return "admin/productAddingForm";
+    }
+
+    @PostMapping("/admin/products/add")
+    public String SubmitProductAddingForm (@RequestParam Integer typeOfProductId, @ModelAttribute Product newProduct){
+        
+        newProduct.setType(typeOfProductsService.findTypeOfProductById(typeOfProductId));
+        productService.save(newProduct);
+
+        return "redirect:/admin/products";
+    }
 }
