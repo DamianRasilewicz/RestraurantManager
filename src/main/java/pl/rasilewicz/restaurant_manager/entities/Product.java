@@ -41,7 +41,6 @@ public class Product {
     private List<Ingredient> ingredients;
 
     @ManyToMany()
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(name = "products_additions", joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "addition_id"))
     private List<Addition> additions;

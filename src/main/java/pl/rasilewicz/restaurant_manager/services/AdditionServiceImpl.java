@@ -41,4 +41,9 @@ public class AdditionServiceImpl implements AdditionService{
     public void update(String name, String description, Double price, Integer id) {
         additionRepository.update(name, description, price, id);
     }
+
+    @Override
+    public void deleteAdditionById(Integer id) {
+        additionRepository.deleteById(id);
+    }
 }

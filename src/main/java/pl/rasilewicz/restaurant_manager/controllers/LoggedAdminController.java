@@ -198,4 +198,12 @@ public class LoggedAdminController {
 
         return "redirect:/admin/additions";
     }
+
+    @GetMapping("/admin/additions/delete")
+    public String additionDeleting (@RequestParam Integer id){
+
+        additionService.deleteAdditionById(id);
+
+        return "redirect:/admin/additions";
+    }
 }
