@@ -7,14 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.rasilewicz.restaurant_manager.entities.Order;
-import pl.rasilewicz.restaurant_manager.entities.Person;
-import pl.rasilewicz.restaurant_manager.entities.Product;
-import pl.rasilewicz.restaurant_manager.entities.TypeOfProduct;
-import pl.rasilewicz.restaurant_manager.services.OrderServiceImpl;
-import pl.rasilewicz.restaurant_manager.services.PersonServiceImpl;
-import pl.rasilewicz.restaurant_manager.services.ProductServiceImpl;
-import pl.rasilewicz.restaurant_manager.services.TypeOfProductsServiceImpl;
+import pl.rasilewicz.restaurant_manager.entities.*;
+import pl.rasilewicz.restaurant_manager.services.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -27,13 +21,15 @@ public class LoggedUserController {
     private final PersonServiceImpl personService;
     private final ProductServiceImpl productService;
     private final TypeOfProductsServiceImpl typeOfProductsService;
+    private final AdditionServiceImpl additionService;
 
     public LoggedUserController(OrderServiceImpl orderService, PersonServiceImpl personService, ProductServiceImpl productService,
-                                TypeOfProductsServiceImpl typeOfProductsService) {
+                                TypeOfProductsServiceImpl typeOfProductsService, AdditionServiceImpl additionService) {
         this.orderService = orderService;
         this.personService = personService;
         this.productService = productService;
         this.typeOfProductsService = typeOfProductsService;
+        this.additionService = additionService;
     }
 
     @GetMapping("/admin/order/history")
@@ -194,6 +190,13 @@ public class LoggedUserController {
         return "redirect:/admin/typeOfProducts";
     }
 
+    @GetMapping("/admin/additions")
+    public String allAdditions (Model model){
 
+        List<Addition> allAdditions = additionService.findAllAdditions();
+        model.addAttribute("allAdditions", allAdditions);
+
+        return "admin/allAdditions";
+    }
 
 }

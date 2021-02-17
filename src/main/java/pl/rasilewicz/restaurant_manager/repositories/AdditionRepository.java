@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.rasilewicz.restaurant_manager.entities.Addition;
+import pl.rasilewicz.restaurant_manager.entities.Order;
+import pl.rasilewicz.restaurant_manager.entities.Product;
+
 import java.util.List;
 
 @Repository
@@ -17,4 +20,7 @@ public interface AdditionRepository extends JpaRepository<Addition, Integer> {
     Addition findAdditionById(Integer id);
 
     Addition findAdditionByName(String name);
+
+    @Query(value = "SELECT * FROM restaurant_manager.additions ORDER BY description DESC", nativeQuery = true)
+    List<Addition> findAllAdditions();
 }

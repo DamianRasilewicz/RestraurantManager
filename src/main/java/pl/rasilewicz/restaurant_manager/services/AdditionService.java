@@ -11,4 +11,6 @@ public interface AdditionService {
     Addition findAdditionById(Integer id);
 
     Addition findAdditionByName(String name);
+
+    List<Addition> findAllAdditions();
 }
