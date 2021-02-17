@@ -36,4 +36,9 @@ public class AdditionServiceImpl implements AdditionService{
     public List<Addition> findAllAdditions() {
         return additionRepository.findAllAdditions();
     }
+
+    @Override
+    public void update(String name, String description, Double price, Integer id) {
+        additionRepository.update(name, description, price, id);
+    }
 }

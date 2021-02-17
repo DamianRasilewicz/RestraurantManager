@@ -180,4 +180,22 @@ public class LoggedAdminController {
 
         return "admin/allAdditions";
     }
+
+    @GetMapping("/admin/additions/edit")
+    public String additionEditingForm (@RequestParam Integer id, Model model){
+
+        Addition editingAddition = additionService.findAdditionById(id);
+        model.addAttribute("editingAddition", editingAddition);
+
+        return "admin/additionEditingForm";
+    }
+
+    @PostMapping("/admin/additions/edit")
+    public String submitAdditionEditingForm (@ModelAttribute Addition editingAddition){
+
+        additionService.update(editingAddition.getName(), editingAddition.getDescription(), editingAddition.getPrice(),
+                               editingAddition.getId());
+
+        return "redirect:/admin/additions";
+    }
 }

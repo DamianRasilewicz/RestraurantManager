@@ -13,4 +13,6 @@ public interface AdditionService {
     Addition findAdditionByName(String name);
 
     List<Addition> findAllAdditions();
+
+    void update(String name, String description, Double price, Integer id);
 }
