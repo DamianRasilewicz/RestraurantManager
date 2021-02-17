@@ -25,7 +25,7 @@ MailServiceImpl implements MailService{
             MimeMessageHelper helper = new MimeMessageHelper(mail, true);
             helper.setTo(to);
             helper.setReplyTo("restauracja.metapack@gmail.com");
-            helper.setFrom("estauracja.metapack@gmail.com");
+            helper.setFrom("restauracja.metapack@gmail.com");
             helper.setSubject(subject);
             helper.setText(content, true);
         } catch (MessagingException e) {
