@@ -27,8 +27,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "UPDATE restaurant_manager.products SET name = ?1 , price = ?2 , type_of_product_id = ?3 WHERE id = ?4", nativeQuery = true)
     void update(String name, Double price, Integer typeOfProductId, Long id);
 
-    @Modifying
-    @Transactional
-    @Query(value = "DELETE FROM restaurant_manager.products WHERE id = ?1", nativeQuery = true)
-    void deleteProductById(Long id);
 }

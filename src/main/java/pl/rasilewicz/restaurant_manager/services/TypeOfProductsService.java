@@ -10,4 +10,6 @@ public interface TypeOfProductsService {
     TypeOfProduct findTypeOfProductById(Integer id);
 
     void update(String name, Integer id);
+
+    void deleteTypeOfProductById(Integer id);
 }

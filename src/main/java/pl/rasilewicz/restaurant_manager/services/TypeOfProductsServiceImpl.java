@@ -28,4 +28,9 @@ public class TypeOfProductsServiceImpl implements TypeOfProductsService{
     public void update(String name, Integer id) {
         typeOfProductRepository.update(name, id);
     }
+
+    @Override
+    public void deleteTypeOfProductById(Integer id) {
+        typeOfProductRepository.deleteById(id);
+    }
 }

@@ -84,7 +84,7 @@ public class LoggedUserController {
     }
 
     @GetMapping("/admin/products/edit")
-    public String ProductEditingForm (@RequestParam Long id, Model model){
+    public String productEditingForm (@RequestParam Long id, Model model){
 
         Product editingProduct = productService.findProductById(id);
         model.addAttribute("editingProduct", editingProduct);
@@ -96,7 +96,7 @@ public class LoggedUserController {
     }
 
     @PostMapping("/admin/products/edit")
-    public String SubmitProductEditingForm (@RequestParam Integer typeOfProductId, @ModelAttribute Product editingProduct){
+    public String submitProductEditingForm (@RequestParam Integer typeOfProductId, @ModelAttribute Product editingProduct){
 
         productService.update(editingProduct.getName(), editingProduct.getPrice(), typeOfProductId, editingProduct.getId());
 
@@ -104,7 +104,7 @@ public class LoggedUserController {
     }
 
     @GetMapping("/admin/products/delete")
-    public String ProductDeleting (@RequestParam Long id){
+    public String productDeleting (@RequestParam Long id){
 
         productService.deleteProductById(id);
 
@@ -112,7 +112,7 @@ public class LoggedUserController {
     }
 
     @GetMapping("/admin/products/add")
-    public String ProductAddingForm (Model model){
+    public String productAddingForm (Model model){
 
         Product newProduct = new Product();
         model.addAttribute("newProduct", newProduct);
@@ -124,7 +124,7 @@ public class LoggedUserController {
     }
 
     @PostMapping("/admin/products/add")
-    public String SubmitProductAddingForm (@RequestParam Integer typeOfProductId, @ModelAttribute("newProduct") @Valid Product newProduct,
+    public String submitProductAddingForm (@RequestParam Integer typeOfProductId, @ModelAttribute("newProduct") @Valid Product newProduct,
                                            BindingResult resultNewProduct, Model model){
 
         if (resultNewProduct.hasErrors()) {
@@ -158,9 +158,17 @@ public class LoggedUserController {
     }
 
     @PostMapping("/admin/typeOfProducts/edit")
-    public String SubmitTypeOfProductEditingForm (@ModelAttribute TypeOfProduct editingTypeOfProduct){
+    public String submitTypeOfProductEditingForm (@ModelAttribute TypeOfProduct editingTypeOfProduct){
 
         typeOfProductsService.update(editingTypeOfProduct.getName(), editingTypeOfProduct.getId());
+
+        return "redirect:/admin/typeOfProducts";
+    }
+
+    @GetMapping("/admin/typeOfProducts/delete")
+    public String typeOfProductDeleting (@RequestParam Integer id){
+
+        typeOfProductsService.deleteTypeOfProductById(id);
 
         return "redirect:/admin/typeOfProducts";
     }
