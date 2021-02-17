@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:include="headerAdmin :: head"></head>
+<body>
+<span th:replace="headerAdmin :: header"></span>
+<section class="dashboard-section">
+    <div class="row dashboard-nowrap">
+        <span th:replace="leftPanelAdmin :: leftPanel"></span>
+        <div class="m-4 p-3 width-medium" th:style="'background:url(' + @{/img/image.png} + ')'">
+        <div class="dashboard-content border-dashed p-3 m-4 view-height">
+            <form method="POST" th:action="@{/admin/typeOfProducts/add}">
+                <div class="mt-4 ml-4 mr-4">
+                    <br>
+                    <h2 class="dashboard-content-title">
+                        <span>Edycja kategorii produktów</span>
+                    </h2>
+                    <table class="table borderless">
+                        <tbody>
+                        <tr class="d-flex">
+                            <td class="col-12 border-bottom border-3"><h3 class="text-uppercase"></h3></td>
+                        </tr>
+
+                        <tr class="d-flex">
+                            <th scope="row" class="col-5" style="text-align: end">Nazwa produktu</th>
+                            <td class="col-2">
+                                <input th:field="*{newTypeOfProduct.name}" class="w-100 p-1">
+                                <div class="text-color-danger text-align: center" th:if="${#fields.hasErrors('newTypeOfProduct.name')}" th:errors="*{newTypeOfProduct.name}"></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="col d-flex justify-content-end mb-2">
+                        <button type="submit" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Zatwierdz zmiany</button>
+                    </div>
+            </form>
+        </div>
+        </div>
+        </div>
+</section>
+
+<span th:replace="footer :: footer"></span>
+</body>
+</html>

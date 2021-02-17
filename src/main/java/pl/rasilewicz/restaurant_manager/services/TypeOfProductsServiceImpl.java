@@ -33,4 +33,9 @@ public class TypeOfProductsServiceImpl implements TypeOfProductsService{
     public void deleteTypeOfProductById(Integer id) {
         typeOfProductRepository.deleteById(id);
     }
+
+    @Override
+    public void save(TypeOfProduct typeOfProduct) {
+        typeOfProductRepository.save(typeOfProduct);
+    }
 }

@@ -173,4 +173,27 @@ public class LoggedUserController {
         return "redirect:/admin/typeOfProducts";
     }
 
+    @GetMapping("/admin/typeOfProducts/add")
+    public String typeOfProductAddingForm (Model model){
+
+        TypeOfProduct newTypeOfProduct = new TypeOfProduct();
+        model.addAttribute("newTypeOfProduct", newTypeOfProduct);
+
+        return "admin/typeOfProductAddingForm";
+    }
+
+    @PostMapping("/admin/typeOfProducts/add")
+    public String submitTypeOfProductAddingForm (@ModelAttribute("newTypeOfProduct") @Valid TypeOfProduct newTypeOfProduct, BindingResult resultNewTypeOfProduct){
+
+        if (resultNewTypeOfProduct.hasErrors()) {
+            return "admin/typeOfProductAddingForm";
+        }
+
+        typeOfProductsService.save(newTypeOfProduct);
+
+        return "redirect:/admin/typeOfProducts";
+    }
+
+
+
 }

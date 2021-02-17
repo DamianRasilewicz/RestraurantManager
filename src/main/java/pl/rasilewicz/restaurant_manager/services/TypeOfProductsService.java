@@ -12,4 +12,6 @@ public interface TypeOfProductsService {
     void update(String name, Integer id);
 
     void deleteTypeOfProductById(Integer id);
+
+    void save(TypeOfProduct typeOfProduct);
 }
