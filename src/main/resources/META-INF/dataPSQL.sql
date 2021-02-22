@@ -1,4 +1,3 @@
-
 INSERT INTO restaurant_manager.type_of_products (name) VALUES ('Pizza');
 INSERT INTO restaurant_manager.type_of_products (name) VALUES ('Danie Główne');
 INSERT INTO restaurant_manager.type_of_products (name) VALUES ('Zupy');
