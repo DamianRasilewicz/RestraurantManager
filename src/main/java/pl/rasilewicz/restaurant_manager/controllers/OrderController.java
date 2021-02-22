@@ -48,8 +48,10 @@ public class OrderController {
 
         if (session.getAttribute("order") == null) {
             Order order = new Order();
+            List<Product> productList = new ArrayList<>();
             order.setNumberOfProducts(0);
             order.setOrderCost(0.00);
+            order.setProducts(productList);
             session.setAttribute("order", order);
         }
 
@@ -67,8 +69,10 @@ public class OrderController {
 
         if (session.getAttribute("order") == null) {
             Order order = new Order();
+            List<Product> productList = new ArrayList<>();
             order.setNumberOfProducts(0);
             order.setOrderCost(0.00);
+            order.setProducts(productList);
             session.setAttribute("order", order);
         }
 
@@ -86,8 +90,10 @@ public class OrderController {
 
         if (session.getAttribute("order") == null) {
             Order order = new Order();
+            List<Product> productList = new ArrayList<>();
             order.setNumberOfProducts(0);
             order.setOrderCost(0.00);
+            order.setProducts(productList);
             session.setAttribute("order", order);
         }
 

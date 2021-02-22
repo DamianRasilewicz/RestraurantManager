@@ -9,6 +9,7 @@ import pl.rasilewicz.restaurant_manager.services.ProductServiceImpl;
 import pl.rasilewicz.restaurant_manager.services.TypeOfProductsServiceImpl;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -37,8 +38,10 @@ public class MainController {
 
         if (session.getAttribute("order") == null) {
             Order order = new Order();
+            List<Product> productList = new ArrayList<>();
             order.setNumberOfProducts(0);
             order.setOrderCost(0.00);
+            order.setProducts(productList);
             session.setAttribute("order", order);
         }
 
