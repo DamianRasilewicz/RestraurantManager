@@ -27,7 +27,6 @@ If you want to try logging:
 -   Hibernate
 -   JavaMailSender
 -   Thymeleaf
--   OpenCSV
 -   Lombok
 -   Security
 -   PostgreSQL
